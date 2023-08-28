@@ -9,7 +9,8 @@ const UsuarioSchema = new mongoose.Schema(
         },
         email: {
             type: String,
-            required: [true, "E-mail é Obrigatório"]
+            required: [true, "E-mail é Obrigatório"],
+            unique: [true, "E-mail já cadastrado"],
         },
         senha: {
             type: String,

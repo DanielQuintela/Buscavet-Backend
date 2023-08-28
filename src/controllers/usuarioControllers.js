@@ -1,6 +1,9 @@
+
+import EncryptedService  from '../Services/EcryptedService.js';
 import { usuarios } from '../models/index.js';
 
 export default class UsuarioController {
+   
 
     static buscarUsuarios = async (req, res, next) => {
         try {
@@ -11,9 +14,15 @@ export default class UsuarioController {
         }
     }
 
+
     static cadastrarUsuario = async (req, res, next) => {
         try {
+
+            const encryptedService = EncryptedService();
+
             let usuario = new usuarios(req.body);
+            let senhaCod = encryptedService.encryptPassword(req.body.senha);
+            usuario.senha = senhaCod;
 
             const result = await usuario.save();
             res.status(201).send(result);
