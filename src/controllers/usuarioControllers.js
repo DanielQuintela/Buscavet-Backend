@@ -32,6 +32,34 @@ export default class UsuarioController {
 
     }
 
+    static loginUsuario = async (req, res, next) => {
+        try {
+
+            const encryptedService = EncryptedService();
+
+            const { email, senha } = req.body;
+            const buscarUsuario = await usuarios.find({ email: email }); 
+
+            if (buscarUsuario.length === 0) {
+                res.status(404).send({ message: 'Usuário não encontrado' });
+                return;
+            }
+            // const usuario = buscarUsuario[0];
+
+            const validatePassword = encryptedService.comparePassword(senha, buscarUsuario[0].senha);
+
+            if (!validatePassword) {
+                res.status(401).send({ message: 'Senha incorreta' });
+                return;
+            }
+           
+            res.status(200).send({ message: 'Login realizado com sucesso' });
+            
+
+        } catch (error) {
+            res.status(500).send({ message: error.message });
+        }
+    }
 
 
 };
