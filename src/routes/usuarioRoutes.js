@@ -6,7 +6,7 @@ const router = express.Router();
 router
 .get("/usuarios", UsuarioController.buscarUsuarios)
 // .get("/usuario/:id", UsuarioController.buscarUsuarioPorId)
-.get("/usuario/login", UsuarioController.loginUsuario)
+.post("/usuario/login", UsuarioController.loginUsuario)
 .post("/usuario/cadastrar", UsuarioController.cadastrarUsuario)
 
 
