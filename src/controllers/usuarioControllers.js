@@ -32,7 +32,7 @@ export default class UsuarioController {
 
     }
 
-    static loginUsuario = async (req, res, next) => {
+    static loginUser = async (req, res, next) => {
         try {
 
             const encryptedService = EncryptedService();
@@ -44,16 +44,47 @@ export default class UsuarioController {
                 res.status(404).send({ message: 'Usuário não encontrado' });
                 return;
             }
-            // const usuario = buscarUsuario[0];
+            const user = buscarUsuario[0];
 
-            const validatePassword = encryptedService.comparePassword(senha, buscarUsuario[0].senha);
+            const validatePassword = encryptedService.comparePassword(senha, user.senha);
 
             if (!validatePassword) {
                 res.status(401).send({ message: 'Senha incorreta' });
                 return;
             }
            
-            res.status(200).send({ message: 'Login realizado com sucesso' });
+            res.status(200).send([{ message: 'Login realizado com sucesso' }, user]);
+            
+
+        } catch (error) {
+            res.status(500).send({ message: error.message });
+        }
+    }
+
+    static changePassword = async (req, res, next) => {
+        try {
+
+            const encryptedService = EncryptedService();
+
+            const { email, senha, novaSenha } = req.body;
+            const buscarUsuario = await usuarios.find({ email: email }); 
+
+            if (buscarUsuario.length === 0) {
+                res.status(404).send({ message: 'Usuário não encontrado' });
+                return;
+            }
+            const user = buscarUsuario[0];
+
+            const validatePassword = encryptedService.comparePassword(senha, user.senha);
+
+            if (!validatePassword) {
+                res.status(401).send({ message: 'Senha incorreta' });
+                return;
+            }
+
+            let senhaCod = encryptedService.encryptPassword(novaSenha);
+            const result = await usuarios.updateOne({ email: email }, { senha: senhaCod });
+            res.status(200).send({ message: 'Senha alterada com sucesso' });
             
 
         } catch (error) {
