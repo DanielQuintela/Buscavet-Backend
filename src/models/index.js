@@ -1,3 +1,5 @@
-import usuarios from "./Usuario.js";
+// Exporta os modelos da aplicação
+import UsuarioModel from "./Usuario.js";
+import VeterinarioModel from "./Veterinario.js";
 
-export { usuarios };
+export { UsuarioModel, VeterinarioModel };

@@ -1,13 +1,13 @@
 
 import EncryptedService  from '../Services/EcryptedService.js';
-import { usuarios } from '../models/index.js';
+import { UsuarioModel } from '../models/index.js';
 
 export default class UsuarioController {
    
 
     static buscarUsuarios = async (req, res, next) => {
         try {
-            const result = await usuarios.find();
+            const result = await UsuarioModel.find();
             res.status(200).send(result);
         } catch (error) {
             res.status(500).send({ message: error.message });
@@ -20,7 +20,7 @@ export default class UsuarioController {
 
             const encryptedService = EncryptedService();
 
-            let usuario = new usuarios(req.body);
+            let usuario = new UsuarioModel(req.body);
             let senhaCod = encryptedService.encryptPassword(req.body.senha);
             usuario.senha = senhaCod;
 
@@ -38,7 +38,7 @@ export default class UsuarioController {
             const encryptedService = EncryptedService();
 
             const { email, senha } = req.body;
-            const buscarUsuario = await usuarios.find({ email: email }); 
+            const buscarUsuario = await UsuarioModel.find({ email: email }); 
 
             if (buscarUsuario.length === 0) {
                 res.status(404).send({ message: 'Usuário não encontrado' });
