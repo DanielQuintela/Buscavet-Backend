@@ -7,7 +7,7 @@ router
 .get("/usuarios", UsuarioController.buscarUsuarios)
 // .get("/usuario/:id", UsuarioController.buscarUsuarioPorId)
 .post("/usuario/login", UsuarioController.loginUsuario)
-.post("/usuario/cadastrar", UsuarioController.cadastrarUsuario)
+.post("/usuarios", UsuarioController.cadastrarUsuario)
 
 
 export default router;
