@@ -2,7 +2,9 @@ import mongoose from "mongoose";
 
 const UsuarioSchema = new mongoose.Schema(
     {
-        id: {type: String},
+        id: {
+            type: String
+        },
         nome: { 
             type: String, 
             required: [true, "Nome é Obrigatório" ]
@@ -59,6 +61,6 @@ const UsuarioSchema = new mongoose.Schema(
     }
 );
 
-const UsuarioModel = mongoose.model('usuario', UsuarioSchema);
+const UsuarioModel = mongoose.model('Usuario', UsuarioSchema);
 
 export default UsuarioModel;
