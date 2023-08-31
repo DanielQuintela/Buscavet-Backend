@@ -1,5 +1,5 @@
-import EncryptedService from '../Services/EncryptedService';
-import { VeterinarioModel } from '../models/index';
+import EncryptedService from '../Services/EncryptedService.js';
+import { VeterinarioModel } from '../models/index.js';
 
 export default class VeterinarioController {
   static loginVeterinario = async (req, res) => {

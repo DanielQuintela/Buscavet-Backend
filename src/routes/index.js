@@ -1,6 +1,6 @@
 import express from 'express';
-import Usuario from './UsuarioRoutes';
-import Veterinario from './VeterinarioRoutes';
+import Usuario from './UsuarioRoutes.js';
+import Veterinario from './VeterinarioRoutes.js';
 
 const routes = (app) => {
   app.route('/').get((req, res) => {

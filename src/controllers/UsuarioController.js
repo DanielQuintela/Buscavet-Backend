@@ -1,5 +1,5 @@
-import EncryptedService from '../Services/EncryptedService';
-import { UsuarioModel } from '../models/index';
+import EncryptedService from '../Services/EncryptedService.js';
+import { UsuarioModel } from '../models/index.js';
 
 export default class UsuarioController {
   static buscarUsuarios = async (req, res) => {

@@ -1,6 +1,6 @@
 import express from 'express';
-import routes from './routes/index';
-import db from './config/dbConfig';
+import routes from './routes/index.js';
+import db from './config/dbConfig.js';
 
 /* eslint-disable-next-line */
 db.on('error', console.error.bind(console, 'Erro de conexão com o banco de dados:'));

@@ -1,5 +1,5 @@
 import express from 'express';
-import VeterinarioController from '../controllers/VeterinarioController';
+import VeterinarioController from '../controllers/VeterinarioController.js';
 
 const router = express.Router();
 
