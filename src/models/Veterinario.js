@@ -20,8 +20,8 @@ const VeterinarioSchema = new mongoose.Schema(
         },
         crmv: {
             type: String,
-            required: [true, "CRMV é Obrigatório"],
-            unique: [true, "CRMV já Cadastrado"]
+            // required: [true, "CRMV é Obrigatório"],
+            // unique: [true, "CRMV já Cadastrado"]
         },
         especialidade: [{
             type: String,
