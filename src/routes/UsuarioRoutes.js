@@ -1,14 +1,12 @@
 import express from 'express';
-import UsuarioController from '../controllers/usuarioControllers.js';
+import UsuarioController from '../controllers/UsuarioController';
 
 const router = express.Router();
 
 router
-.get("/usuarios", UsuarioController.buscarUsuarios)
-// .get("/usuario/:id", UsuarioController.buscarUsuarioPorId)
-.post("/usuario/login", UsuarioController.loginUsuario)
-.post("/usuarios", UsuarioController.cadastrarUsuario)
-.post("/usuario/update/password", UsuarioController.changePassword)
-
+  .get('/usuarios', UsuarioController.buscarUsuarios)
+  .post('/usuario/login', UsuarioController.loginUsuario)
+  .post('/usuarios', UsuarioController.cadastrarUsuario)
+  .post('/usuario/update/password', UsuarioController.changePassword);
 
 export default router;

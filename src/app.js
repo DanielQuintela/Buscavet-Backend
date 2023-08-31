@@ -1,10 +1,12 @@
-import express from "express";
-import routes from "./routes/index.js";
-import db from "./config/dbConfig.js";
+import express from 'express';
+import routes from './routes/index';
+import db from './config/dbConfig';
 
-db.on("error", console.error.bind(console, "Erro de conexão com o banco de dados:"));
-db.once("open", () => {
-    console.log("Conexão com o banco de dados estabelecida com sucesso.");
+/* eslint-disable-next-line */
+db.on('error', console.error.bind(console, 'Erro de conexão com o banco de dados:'));
+db.once('open', () => {
+/* eslint-disable-next-line */
+  console.log('Conexão com o banco de dados estabelecida com sucesso.');
 });
 
 const app = express();
