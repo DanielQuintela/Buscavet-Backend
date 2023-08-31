@@ -1,4 +1,4 @@
-# Back-And do BuscaVet
+# Back-End do BuscaVet
 
 ## Pré-requisitos
 
@@ -11,4 +11,22 @@ Instalar dependências:
 
 ```
 npm install
+```
+
+Iniciar a aplicação:
+
+```
+npm run dev
+```
+
+Encontrar erros:
+
+```
+npm run lint
+```
+
+Resolver erros:
+
+```
+npm run lint -- --fix
 ```
