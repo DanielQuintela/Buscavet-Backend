@@ -1,10 +1,10 @@
 import { EntitySchema } from 'typeorm';
-import Veterinario from '../models/VeterinarioModel.js';
+import VeterinarioModel from '../models/VeterinarioModel.js';
 
 export default new EntitySchema({
-  name: 'Veterinario',
+  name: 'VeterinarioModel',
   tableName: 'veterinarios',
-  target: Veterinario,
+  target: VeterinarioModel,
   columns: {
     id: {
       primary: true, type: 'int', generated: true,

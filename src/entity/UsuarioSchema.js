@@ -1,10 +1,10 @@
 import { EntitySchema } from 'typeorm';
-import Usuario from '../models/UsuarioModel.js';
+import UsuarioModel from '../models/UsuarioModel.js';
 
 export default new EntitySchema({
-  name: 'Usuario',
+  name: 'UsuarioModel',
   tableName: 'usuarios',
-  target: Usuario,
+  target: UsuarioModel,
   columns: {
     id: {
       primary: true, type: 'int', generated: true,
