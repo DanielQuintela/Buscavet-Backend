@@ -1,10 +1,12 @@
 import EncryptedService from '../Services/EncryptedService.js';
-import { UsuarioModel } from '../models/index.js';
+import db from '../config/dbConfig.js';
+import UsuarioSchema from '../entity/UsuarioSchema.js';
 
 export default class UsuarioController {
   static buscarUsuarios = async (req, res) => {
     try {
-      const result = await UsuarioModel.find();
+      const userRepository = db.manager.getRepository(UsuarioSchema);
+      const result = await userRepository.find({ select: { id: true, nome: true, email: true } });
       res.status(200).send(result);
     } catch (error) {
       res.status(500).send({ message: error.message });
@@ -14,24 +16,23 @@ export default class UsuarioController {
   static cadastrarUsuario = async (req, res) => {
     try {
       const encryptedService = EncryptedService();
+      const senha = encryptedService.encryptPassword(req.body.senha);
 
-      const usuario = new UsuarioModel(req.body);
-      const senhaCod = encryptedService.encryptPassword(req.body.senha);
-      usuario.senha = senhaCod;
-
-      const result = await usuario.save();
+      const userRepository = db.manager.getRepository(UsuarioSchema);
+      const result = await userRepository.save({ ...req.body, senha });
       res.status(201).send(result);
     } catch (error) {
       res.status(500).send({ message: error.message });
     }
   };
 
-  static loginUser = async (req, res) => {
+  static loginUsuario = async (req, res) => {
     try {
       const encryptedService = EncryptedService();
 
       const { email, senha } = req.body;
-      const buscarUsuario = await UsuarioModel.find({ email });
+      const userRepository = db.manager.getRepository(UsuarioSchema);
+      const buscarUsuario = await userRepository.find({ where: { email } });
 
       if (buscarUsuario.length === 0) {
         res.status(404).send({ message: 'Usuário não encontrado' });
@@ -45,19 +46,18 @@ export default class UsuarioController {
         res.status(401).send({ message: 'Senha incorreta' });
         return;
       }
-
-      res.status(200).send([{ message: 'Login realizado com sucesso' }, user]);
+      res.status(200).send({ message: 'Login realizado com sucesso' }); // TODO: Fazer um login, falta o token Cookies ou jwt
     } catch (error) {
       res.status(500).send({ message: error.message });
     }
   };
 
-  static changePassword = async (req, res) => {
+  static mudarSenha = async (req, res) => {
     try {
       const encryptedService = EncryptedService();
-
+      const userRepository = db.manager.getRepository(UsuarioSchema);
       const { email, senha, novaSenha } = req.body;
-      const buscarUsuario = await UsuarioModel.find({ email });
+      const buscarUsuario = await userRepository.find({ id: req.params.id });
 
       if (buscarUsuario.length === 0) {
         res.status(404).send({ message: 'Usuário não encontrado' });
@@ -73,7 +73,7 @@ export default class UsuarioController {
       }
 
       const senhaCod = encryptedService.encryptPassword(novaSenha);
-      await UsuarioModel.updateOne({ email }, { senha: senhaCod });
+      await userRepository.update({ email }, { senha: senhaCod });
       res.status(200).send({ message: 'Senha alterada com sucesso' });
     } catch (error) {
       res.status(500).send({ message: error.message });

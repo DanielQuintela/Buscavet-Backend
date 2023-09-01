@@ -5,8 +5,8 @@ const router = express.Router();
 
 router
   .get('/usuarios', UsuarioController.buscarUsuarios)
-  .post('/usuario/login', UsuarioController.loginUser)
+  .post('/usuarios/login', UsuarioController.loginUsuario)
   .post('/usuarios', UsuarioController.cadastrarUsuario)
-  .post('/usuario/update/password', UsuarioController.changePassword);
+  .patch('/usuarios/:id', UsuarioController.mudarSenha);
 
 export default router;
