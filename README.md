@@ -3,7 +3,6 @@
 ## Pré-requisitos
 
 - nodejs
-- npm
 
 ## Comandos Básicos
 
@@ -11,6 +10,12 @@ Instalar dependências:
 
 ```
 npm install
+```
+
+Configurar hooks:
+
+```
+make setup
 ```
 
 Iniciar a aplicação:

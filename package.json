@@ -8,14 +8,14 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ."
   },
-  "author": "Daniel",
+  "author": "Daniel, Thiago",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "mongoose": "^7.5.0",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "typeorm": "^0.3.17"
   },
   "devDependencies": {
     "eslint": "^8.48.0",
