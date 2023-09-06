@@ -35,10 +35,10 @@ create database db;
 
 ## Comandos dentro do conteiner da API
 
-Instalar dependências do projeto:
+Entrar no container da API:
 
 ```
-npm install
+docker compose exec api bash
 ```
 
 Configurar hooks:
@@ -47,19 +47,13 @@ Configurar hooks:
 make setup
 ```
 
-Iniciar a aplicação:
-
-```
-npm run dev
-```
-
-Encontrar erros:
+Encontrar erros de formatação:
 
 ```
 npm run lint
 ```
 
-Resolver erros:
+Resolver erros de formatação:
 
 ```
 npm run lint -- --fix
