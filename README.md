@@ -95,9 +95,7 @@ E rode
 npm install bcrypt
 ```
 
-Pare os Containers com Ctrl+C
-
-Rode-os Novamente
+Pare os Containers com Ctrl+C e Rode-os Novamente
 
 ```
 docker compose up
