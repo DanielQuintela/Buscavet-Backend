@@ -4,7 +4,7 @@ services:
     user: 1000:1000
     build: .
     ports:
-      - 3000:3000
+      - 4000:4000
     env_file: .env
     command: sh -c "npm install && npm run dev"
     depends_on:
