@@ -4,4 +4,4 @@ O código principal está em development e as branchs demais são atualizações
 No futuro pretendo por a main para homologação. Até agora permanece vazio para evitar conflitos.
 
 # Para rodar o projeto
-A branch com o projeto na versão estável se encontra em '''Development'''
+A branch com o projeto na versão estável se encontra em <b>Development</b>
