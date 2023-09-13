@@ -4,6 +4,6 @@ import SearchCep from '../Services/SearchCep';
 const router = express.Router();
 
 router
-    .post('/services/getcep', SearchCep.searchCep)
+    .post('/services/getcep', SearchCep.searchCep);
 
 export default router;

@@ -22,5 +22,5 @@ export default class SearchCep {
         } catch (error) {
             res.status(500).send({ message: error.message});
         }
-    }
+    };
 }
