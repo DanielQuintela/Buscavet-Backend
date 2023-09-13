@@ -1,4 +1,9 @@
 # Back-End do BuscaVet
+Aqui nesse projeto está sendo desenvolvido a API, backend do sistema Buscavet
+O código principal está em main e as branchs demais são atualizações que irão para a branch principal.
+No futuro pretendo por a main para homologação. Até agora permanece vazio para evitar conflitos.
+
+# Para rodar
 
 - :warning: ATENÇÃO :warning: Antes de iniciar a aplicação, certifique-se de configurar os hooks e as dependências. Para fazer isso, siga estas etapas:
 
