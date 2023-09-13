@@ -5,3 +5,5 @@ const router = express.Router();
 
 router
     .post('/services/getcep', SearchCep.searchCep)
+
+export default router;
