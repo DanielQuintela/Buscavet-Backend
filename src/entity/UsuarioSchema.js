@@ -6,7 +6,7 @@ export default new EntitySchema({
   tableName: 'usuarios',
   target: UsuarioModel,
   columns: {
-    id: {
+    idUsuario: {
       primary: true, type: 'int', generated: true,
     },
     nome: {
@@ -14,9 +14,50 @@ export default new EntitySchema({
     },
     email: {
       type: 'text',
+      nullable: false,
+      unique: true,
     },
     senha: {
       type: 'text',
+      nullable: false,
+    },
+    // cpf: {
+    //   type: 'text',
+    // },
+    // telefone: {
+    //   type: 'text',
+    // },
+    // endereco: {
+    //   type: 'text',
+    // },
+    // cidade: {
+    //   type: 'text',
+    // },
+    // cep: {
+    //   type: 'text',
+    // },
+    // estado: {
+    //   type: 'text',
+    // },
+    // dataNascimento: {
+    //   type: 'text',
+    // },
+    tipoUsuario: {
+      type: 'text',
+      nullable: true,
+      // enum: ['c', 'vc'],
+    },
+  },
+  relarions: {
+    IdVeterinario: {
+      target: 'veterinarios',
+      type: 'one-to-one',
+      joinColumn: {
+        name: 'idVeterinario',
+      },
+      inverseJoinColumn: {
+        name: 'idUsuario', // O nome da coluna na tabela veterinarios que faz referência ao usuário
+      },
     },
   },
 

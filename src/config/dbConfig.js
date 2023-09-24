@@ -1,6 +1,5 @@
 import { DataSource } from 'typeorm';
-import UsuarioSchema from '../entity/UsuarioSchema.js';
-import VeterinarioSchema from '../entity/VeterinarioSchema.js';
+import { UsuarioSchema, VeterinarioSchema } from '../entity/index.js';
 
 const db = new DataSource({
   type: 'postgres',

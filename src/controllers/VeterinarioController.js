@@ -1,15 +1,14 @@
-import EncryptedService from '../Services/EncryptedService.js';
 import db from '../config/dbConfig.js';
-import VeterinarioSchema from '../entity/VeterinarioSchema.js';
+import { VeterinarioSchema } from '../entity/index.js';
+import UsuarioController from './UsuarioController.js';
+// import UsuarioController from './UsuarioController.js';
 
 export default class VeterinarioController {
   static cadastrarVeterinario = async (req, res) => {
     try {
-      const encryptedService = EncryptedService();
-      const veterinarioRepository = db.manager.getRepository(VeterinarioSchema);
-      const senha = encryptedService.encryptPassword(req.body.senha);
-      const result = await veterinarioRepository.save({ ...req.body, senha });
-      res.status(201).send(result);
+      const saved = await UsuarioController.cadastrarUsuarioVeterinario(req, res);
+
+      res.status(201).send(saved);
     } catch (error) {
       res.status(500).send({ message: error.message });
     }
