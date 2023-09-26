@@ -1,5 +1,17 @@
 export default class EstabelecimentoModel {
-  constructor(id, razaoSocial, nomeFantasia, cnpj, endereco, telefone, cidade, estado, cep, email, tipoEstabelecimento) {
+  constructor(
+    id,
+    razaoSocial,
+    nomeFantasia,
+    cnpj,
+    endereco,
+    telefone,
+    cidade,
+    estado,
+    cep,
+    email,
+    tipoEstabelecimento,
+  ) {
     this.id = id;
     this.razaoSocial = razaoSocial;
     this.nomeFantasia = nomeFantasia;
