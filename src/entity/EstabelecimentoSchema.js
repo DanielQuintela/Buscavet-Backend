@@ -1,30 +1,27 @@
 import { EntitySchema } from 'typeorm';
-import UsuarioModel from '../models/UsuarioModel.js';
+import EstabelecimentoModel from '../models/EstabelecimentoModel.js';
 
 export default new EntitySchema({
-  name: 'UsuarioModel',
-  tableName: 'USUARIOS',
-  target: UsuarioModel,
+  name: 'EstabelecimentoModel',
+  tableName: 'ESTABALECIMENTOS',
+  target: EstabelecimentoModel,
   columns: {
     id: {
       primary: true, type: 'int', generated: true,
     },
-    email: {
+    razaoSocial: {
       type: 'text',
     },
-    senha: {
+    nomeFantasia: {
       type: 'text',
     },
-    nome: {
-      type: 'text',
-    },
-    cpf: {
-      type: 'text',
-    },
-    telefone: {
+    cnpj: {
       type: 'text',
     },
     endereco: {
+      type: 'text',
+    },
+    telefone: {
       type: 'text',
     },
     cidade: {
@@ -36,9 +33,11 @@ export default new EntitySchema({
     cep: {
       type: 'text',
     },
-    tipo: {
+    email: {
+      type: 'text',
+    },
+    tipoEstabelecimento: {
       type: 'text',
     },
   },
-
 });
