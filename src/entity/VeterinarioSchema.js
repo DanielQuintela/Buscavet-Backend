@@ -11,6 +11,7 @@ export default new EntitySchema({
     },
     crmv: {
       type: 'text',
+      unique: true,
     },
     situacao: {
       type: 'text',
@@ -48,6 +49,7 @@ export default new EntitySchema({
       joinColumn: {
         name: 'idUsuario',
       },
+      nullable: false,
     },
     especializacao: {
       type: 'many-to-one',
