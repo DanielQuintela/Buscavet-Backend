@@ -3,14 +3,11 @@ import UsuarioModel from '../models/UsuarioModel.js';
 
 export default new EntitySchema({
   name: 'UsuarioModel',
-  tableName: 'usuarios',
+  tableName: 'USUARIOS',
   target: UsuarioModel,
   columns: {
     idUsuario: {
       primary: true, type: 'int', generated: true,
-    },
-    nome: {
-      type: 'text',
     },
     email: {
       type: 'text',
@@ -58,6 +55,30 @@ export default new EntitySchema({
       inverseJoinColumn: {
         name: 'idUsuario', // O nome da coluna na tabela veterinarios que faz referência ao usuário
       },
+    },
+    nome: {
+      type: 'text',
+    },
+    cpf: {
+      type: 'text',
+    },
+    telefone: {
+      type: 'text',
+    },
+    endereco: {
+      type: 'text',
+    },
+    cidade: {
+      type: 'text',
+    },
+    estado: {
+      type: 'text',
+    },
+    cep: {
+      type: 'text',
+    },
+    tipo: {
+      type: 'text',
     },
   },
 

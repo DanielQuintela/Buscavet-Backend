@@ -1,26 +1,27 @@
 export default class VeterinarioModel {
   constructor(
-    idVeterinario,
+    id,
     crmv,
+    enderecoComercial,
     telefoneComercial,
-    // enderecoComercial,
-    // situacaoCadastro,
-    // cidadeComercial,
-    // cepComercial,
-    // estadoComercial,
-    // emailComercial,
-    // eslint-disable-next-line comma-dangle
-    idUsuario
+    cepComercial,
+    cidadeComercial,
+    estadoComercial,
+    situacao,
+    idEspecializacao,
+    idUsuario,
+    emailComercial,
   ) {
-    this.idVeterinario = idVeterinario;
+    this.id = id;
     this.crmv = crmv;
+    this.situacao = situacao;
+    this.enderecoComercial = enderecoComercial;
     this.telefoneComercial = telefoneComercial;
-    // this.enderecoComercial = enderecoComercial;
-    // this.situacaoCadastro = situacaoCadastro;
-    // this.cidadeComercial = cidadeComercial;
-    // this.cepComercial = cepComercial;
-    // this.estadoComercial = estadoComercial;
-    // this.emailComercial = emailComercial;
+    this.cepComercial = cepComercial;
+    this.cidadeComercial = cidadeComercial;
+    this.estadoComercial = estadoComercial;
+    this.emailComercial = emailComercial;
+    this.idEspecializacao = idEspecializacao;
     this.idUsuario = idUsuario;
   }
 }

@@ -3,7 +3,7 @@ import VeterinarioModel from '../models/VeterinarioModel.js';
 
 export default new EntitySchema({
   name: 'VeterinarioModel',
-  tableName: 'veterinarios',
+  tableName: 'VETERINARIOS',
   target: VeterinarioModel,
   columns: {
     idVeterinario: {
@@ -12,39 +12,51 @@ export default new EntitySchema({
     crmv: {
       type: 'text',
       unique: true,
-      nullable: false,
+    },
+    situacao: {
+      type: 'text',
+    },
+    enderecoComercial: {
+      type: 'text',
     },
     telefoneComercial: {
       type: 'text',
-      unique: true,
     },
-    // enderecoComercial: {
-    //   type: 'text',
-    // },
-    // situacaoCadastro: {
-    //   type: 'text',
-    // },
-    // cidadeComercial: {
-    //   type: 'text',
-    // },
-    // cepComercial: {
-    //   type: 'text',
-    // },
-    // estadoComercial: {
-    //   type: 'text',
-    // },
-    // emailComercial: {
-    //   type: 'text',
-    // },
-  },
-  relations: {
+    cepComercial: {
+      type: 'text',
+    },
+    cidadeComercial: {
+      type: 'text',
+    },
+    estadoComercial: {
+      type: 'text',
+    },
+    emailComercial: {
+      type: 'text',
+    },
+    idEspecializacao: {
+      type: 'text',
+    },
     idUsuario: {
-      target: 'usuarios',
+      type: 'text',
+    },
+  },
+
+  relations: {
+    usuario: {
       type: 'one-to-one',
+      target: 'UsuarioModel',
       joinColumn: {
-        name: 'idUsuario', // Deve corresponder ao nome da coluna na tabela usuarios
+        name: 'idUsuario',
       },
-      nullable: false, // Não pode ser nulo
+      nullable: false,
+    },
+    especializacao: {
+      type: 'many-to-one',
+      target: 'EspecializacaoModel',
+      joinColumn: {
+        name: 'idEspecializacao',
+      },
     },
   },
 });
