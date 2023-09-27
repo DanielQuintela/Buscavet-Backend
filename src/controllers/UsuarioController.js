@@ -23,6 +23,24 @@ export default class UsuarioController {
     }
   };
 
+  // static buscarVeterinarioEmail = async (req, res) => {
+  //   try {
+  //     const userRepository = db.manager.getRepository(UsuarioSchema);
+  //     const buscaUsuario = await userRepository.find({ where: { email: req.body.email } });
+  //     const usuario = buscaUsuario[0];
+  //     if (buscaUsuario.length === 0) {
+  //       res.status(404).send({ message: 'Usuário não encontrado' });
+  //       return;
+  //     }
+  //     const { idUsuario } = usuario;
+  //     const vetRepository = db.manager.getRepository(VeterinarioSchema);
+  //     const result = await vetRepository.find({ where: { idUsuario } });
+  //     return result;
+  //   } catch (erro) {
+  //     res.status(500).send({ message: erro.message });
+  //   }
+  // };
+
   static buscarUsuarios = async (req, res) => {
     try {
       const userRepository = db.manager.getRepository(UsuarioSchema);
@@ -80,10 +98,7 @@ export default class UsuarioController {
         res.status(401).send({ message: 'CRMV é obrigatório' });
         return;
       }
-      if (req.body.crmv.length < 5 || req.body.crmv.length > 6) {
-        res.status(401).send({ message: 'CRMV deve ter no mínimo 5 caracteres' });
-        return;
-      }
+
       if (email === undefined || email === '') {
         res.status(401).send({ message: 'Email é obrigatório' });
         return;

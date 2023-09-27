@@ -4,13 +4,23 @@ import UsuarioController from './UsuarioController.js';
 // import UsuarioController from './UsuarioController.js';
 
 export default class VeterinarioController {
-  static cadastrarVeterinario = async (req, res) => {
+  static buscarVeterinariosId = async (req, res) => {
     try {
-      const saved = await UsuarioController.cadastrarUsuarioVeterinario(req, res);
+      const veterinarioRepository = db.manager.getRepository(VeterinarioSchema);
+      const result = await veterinarioRepository.find({ where: { idVeterinario: req.params.id } });
+      res.status(200).send(result);
+    } catch (erro) {
+      res.status(500).send({ message: erro.message });
+    }
+  };
 
-      res.status(201).send(saved);
-    } catch (error) {
-      res.status(500).send({ message: error.message });
+  static buscarVeterinariosEmail = async (req, res) => {
+    try {
+      const veterinarioRepository = db.manager.getRepository(VeterinarioSchema);
+      const result = await veterinarioRepository.find({ where: { email: req.body.email } });
+      res.status(200).send(result);
+    } catch (erro) {
+      res.status(500).send({ message: erro.message });
     }
   };
 
@@ -23,6 +33,16 @@ export default class VeterinarioController {
         },
       });
       res.status(200).send(result);
+    } catch (error) {
+      res.status(500).send({ message: error.message });
+    }
+  };
+
+  static cadastrarVeterinario = async (req, res) => {
+    try {
+      const saved = await UsuarioController.cadastrarUsuarioVeterinario(req, res);
+
+      res.status(201).send(saved);
     } catch (error) {
       res.status(500).send({ message: error.message });
     }
