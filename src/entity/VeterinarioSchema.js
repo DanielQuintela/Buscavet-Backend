@@ -6,7 +6,7 @@ export default new EntitySchema({
   tableName: 'VETERINARIOS',
   target: VeterinarioModel,
   columns: {
-    id: {
+    idVeterinario: {
       primary: true, type: 'int', generated: true,
     },
     crmv: {
@@ -59,5 +59,4 @@ export default new EntitySchema({
       },
     },
   },
-
 });

@@ -5,7 +5,6 @@ const router = express.Router();
 
 router
   .get('/veterinarios', VeterinarioController.buscarVeterinarios)
-  .post('/veterinarios/login', VeterinarioController.loginVeterinario)
   .post('/veterinarios', VeterinarioController.cadastrarVeterinario);
 
 export default router;
