@@ -1,6 +1,6 @@
 export default class UsuarioModel {
-  constructor(id, email, senha, nome, cpf, telefone, endereco, cidade, estado, cep, tipo) {
-    this.id = id;
+  constructor(idUsuario, email, senha, nome, cpf, telefone, endereco, cidade, estado, cep, tipo) {
+    this.idUsuario = idUsuario;
     this.email = email;
     this.senha = senha;
     this.nome = nome;
