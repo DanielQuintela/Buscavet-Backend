@@ -1,6 +1,6 @@
 export default class VeterinarioModel {
   constructor(
-    id,
+    idVeterinario,
     crmv,
     enderecoComercial,
     telefoneComercial,
@@ -12,7 +12,7 @@ export default class VeterinarioModel {
     idUsuario,
     emailComercial,
   ) {
-    this.id = id;
+    this.idVeterinario = idVeterinario;
     this.crmv = crmv;
     this.situacao = situacao;
     this.enderecoComercial = enderecoComercial;

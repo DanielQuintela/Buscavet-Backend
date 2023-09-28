@@ -18,44 +18,6 @@ export default new EntitySchema({
       type: 'text',
       nullable: false,
     },
-    // cpf: {
-    //   type: 'text',
-    // },
-    // telefone: {
-    //   type: 'text',
-    // },
-    // endereco: {
-    //   type: 'text',
-    // },
-    // cidade: {
-    //   type: 'text',
-    // },
-    // cep: {
-    //   type: 'text',
-    // },
-    // estado: {
-    //   type: 'text',
-    // },
-    // dataNascimento: {
-    //   type: 'text',
-    // },
-    tipoUsuario: {
-      type: 'text',
-      nullable: true,
-      // enum: ['c', 'vc'],
-    },
-  },
-  relarions: {
-    IdVeterinario: {
-      target: 'veterinarios',
-      type: 'one-to-one',
-      joinColumn: {
-        name: 'idVeterinario',
-      },
-      inverseJoinColumn: {
-        name: 'idUsuario', // O nome da coluna na tabela veterinarios que faz referência ao usuário
-      },
-    },
     nome: {
       type: 'text',
     },
@@ -77,9 +39,27 @@ export default new EntitySchema({
     cep: {
       type: 'text',
     },
-    tipo: {
+    dataNascimento: {
       type: 'text',
     },
+    tipoUsuario: {
+      type: 'text',
+      nullable: true,
+      // enum: ['c', 'vc'],
+    },
+  },
+  relarions: {
+    IdVeterinario: {
+      target: 'veterinarios',
+      type: 'one-to-one',
+      joinColumn: {
+        name: 'idVeterinario',
+      },
+      inverseJoinColumn: {
+        name: 'idUsuario', // O nome da coluna na tabela veterinarios que faz referência ao usuário
+      },
+    },
+    
   },
 
 });

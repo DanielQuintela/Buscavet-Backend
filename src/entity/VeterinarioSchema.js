@@ -16,30 +16,30 @@ export default new EntitySchema({
     situacao: {
       type: 'text',
     },
-    enderecoComercial: {
-      type: 'text',
-    },
-    telefoneComercial: {
-      type: 'text',
-    },
-    cepComercial: {
-      type: 'text',
-    },
-    cidadeComercial: {
-      type: 'text',
-    },
-    estadoComercial: {
-      type: 'text',
-    },
-    emailComercial: {
-      type: 'text',
-    },
-    idEspecializacao: {
-      type: 'text',
-    },
-    idUsuario: {
-      type: 'text',
-    },
+    // enderecoComercial: {
+    //   type: 'text',
+    // },
+    // telefoneComercial: {
+    //   type: 'text',
+    // },
+    // cepComercial: {
+    //   type: 'text',
+    // },
+    // cidadeComercial: {
+    //   type: 'text',
+    // },
+    // estadoComercial: {
+    //   type: 'text',
+    // },
+    // emailComercial: {
+    //   type: 'text',
+    // },
+    // idEspecializacao: {
+    //   type: 'text',
+    // },
+    // idUsuario: {
+    //   type: 'text',
+    // },
   },
 
   relations: {
