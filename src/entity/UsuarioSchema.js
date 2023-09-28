@@ -59,7 +59,7 @@ export default new EntitySchema({
         name: 'idUsuario', // O nome da coluna na tabela veterinarios que faz referência ao usuário
       },
     },
-    
+
   },
 
 });
