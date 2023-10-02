@@ -44,7 +44,7 @@ export default new EntitySchema({
     },
     tipoUsuario: {
       type: 'text',
-      nullable: true,
+      nullable: false,
       // enum: ['c', 'vc'],
     },
   },
