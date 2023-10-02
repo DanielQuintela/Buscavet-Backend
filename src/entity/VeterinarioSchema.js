@@ -16,6 +16,9 @@ export default new EntitySchema({
     situacao: {
       type: 'text',
     },
+    emailComercial: {
+      type: 'text',
+    },
     // enderecoComercial: {
     //   type: 'text',
     // },
@@ -29,9 +32,6 @@ export default new EntitySchema({
     //   type: 'text',
     // },
     // estadoComercial: {
-    //   type: 'text',
-    // },
-    // emailComercial: {
     //   type: 'text',
     // },
     // idEspecializacao: {
