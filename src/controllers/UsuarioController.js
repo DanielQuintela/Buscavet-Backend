@@ -94,7 +94,7 @@ export default class UsuarioController {
 
       const { email } = req.body;
 
-      if (req.body.crmv.length > 6) {
+      if (req.body.crmv.length < 6) {
         res.status(401).send({ message: 'CRMV é obrigatório' });
         return;
       }
@@ -133,6 +133,7 @@ export default class UsuarioController {
         const tipoUsuario = 'vc';
         await userRepository.save({ ...req.body, senha, tipoUsuario });
         const buscarUsuarion = await userRepository.find({ where: { email: req.body.email } });
+        console.log(buscarUsuarion[0]);
         const { idUsuario } = buscarUsuarion[0];
         if (idUsuario !== null) {
           const savedVet = await vetRepository.save({ ...req.body, idUsuario });
