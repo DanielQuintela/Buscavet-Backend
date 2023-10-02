@@ -94,7 +94,7 @@ export default class UsuarioController {
 
       const { email } = req.body;
 
-      if (req.body.crmv === undefined) {
+      if (req.body.crmv === null || req.body.crmv.length > 6) {
         res.status(401).send({ message: 'CRMV é obrigatório' });
       } else if (email === undefined || email === '') {
         res.status(401).send({ message: 'Email é obrigatório' });
