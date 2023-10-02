@@ -132,11 +132,10 @@ export default class UsuarioController {
       if (buscarUsuario.length === 0) {
         const tipoUsuario = 'vc';
         await userRepository.save({ ...req.body, senha, tipoUsuario });
-        const buscarUsuarion = await userRepository.find({ where: { email: req.body.email } });
-        console.log(buscarUsuarion[0]);
-        const { idUsuario } = buscarUsuarion[0];
-        if (idUsuario !== null) {
-          const savedVet = await vetRepository.save({ ...req.body, idUsuario });
+        const buscarUsuariov = await userRepository.find({ where: { email: req.body.email } });
+        const usuariov = buscarUsuariov[0];
+        if (usuariov !== null) {
+          const savedVet = await vetRepository.save({ ...req.body, idUsuario: usuariov.idUsuario });
           res.status(201).send(savedVet);
         } else {
           res.status(404).send({ message: 'usuario não cadastrado' });
