@@ -1,6 +1,5 @@
 import { DataSource } from 'typeorm';
 import {
-  // eslint-disable-next-line max-len
   UsuarioSchema, VeterinarioSchema, EspecializacaoSchema, EstabelecimentoSchema, ServicoSchema, VacinaSchema, ProdutoSchema, ClienteSchema, AnimalEstimacaoSchema, ConsultaSchema, AvaliacaoSchema, DoseVacinaAnimalSchema, ProdutoEstabelecimentoSchema, ServicoEstabelecimentoSchema, ServicoVeterinarioSchema, UsuarioEstabelecimentoSchema, VeterinarioEstabelecimentoSchema,
 } from '../entity/index.js';
 

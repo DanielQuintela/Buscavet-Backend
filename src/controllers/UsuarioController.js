@@ -96,14 +96,10 @@ export default class UsuarioController {
 
       if (req.body.crmv === undefined) {
         res.status(401).send({ message: 'CRMV é obrigatório' });
-        return;
-      }
-
-      if (email === undefined || email === '') {
+      } else if (email === undefined || email === '') {
         res.status(401).send({ message: 'Email é obrigatório' });
         return;
-      }
-      if (req.body.senha.length < 2) {
+      } else if (req.body.senha.length < 3) {
         res.status(401).send({ message: 'senha deve ter no mínimo 3 caracteres' });
         return;
       }
@@ -130,15 +126,16 @@ export default class UsuarioController {
           return;
         }
       }
-
-      const tipoUsuario = 'vc';
-      const result = await userRepository.save({ ...req.body, senha, tipoUsuario });
-      const { idUsuario } = result;
-      if (idUsuario !== null) {
-        const savedVet = await vetRepository.save({ ...req.body, idUsuario });
-        res.status(201).send(savedVet);
-      } else {
-        res.status(404).send({ message: 'usuario não cadastrado' });
+      if (buscarUsuario.length === 0) {
+        const tipoUsuario = 'vc';
+        const result = await userRepository.save({ ...req.body, senha, tipoUsuario });
+        const { idUsuario } = result;
+        if (idUsuario !== null) {
+          const savedVet = await vetRepository.save({ ...req.body, idUsuario });
+          res.status(201).send(savedVet);
+        } else {
+          res.status(404).send({ message: 'usuario não cadastrado' });
+        }
       }
     } catch (erro) {
       res.status(500).send({ message: erro.message });
