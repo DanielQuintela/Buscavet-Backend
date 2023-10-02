@@ -94,12 +94,15 @@ export default class UsuarioController {
 
       const { email } = req.body;
 
-      if (req.body.crmv === null || req.body.crmv.length > 6) {
+      if (req.body.crmv.length > 6) {
         res.status(401).send({ message: 'CRMV é obrigatório' });
-      } else if (email === undefined || email === '') {
+        return;
+      }
+      if (email === undefined || email === '') {
         res.status(401).send({ message: 'Email é obrigatório' });
         return;
-      } else if (req.body.senha.length < 3) {
+      }
+      if (req.body.senha.length < 3) {
         res.status(401).send({ message: 'senha deve ter no mínimo 3 caracteres' });
         return;
       }
@@ -128,8 +131,9 @@ export default class UsuarioController {
       }
       if (buscarUsuario.length === 0) {
         const tipoUsuario = 'vc';
-        const result = await userRepository.save({ ...req.body, senha, tipoUsuario });
-        const { idUsuario } = result;
+        await userRepository.save({ ...req.body, senha, tipoUsuario });
+        const buscarUsuarion = await userRepository.find({ where: { email: req.body.email } });
+        const { idUsuario } = buscarUsuarion[0];
         if (idUsuario !== null) {
           const savedVet = await vetRepository.save({ ...req.body, idUsuario });
           res.status(201).send(savedVet);
