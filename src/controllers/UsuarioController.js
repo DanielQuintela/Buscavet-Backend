@@ -1,4 +1,4 @@
-import EncryptedService from '../Services/EncryptedService.js';
+import { validarCPF, EncryptedService } from '../Services/index.js';
 import db from '../config/dbConfig.js';
 import { UsuarioSchema, VeterinarioSchema } from '../entity/index.js';
 
@@ -46,7 +46,14 @@ export default class UsuarioController {
       const encryptedService = EncryptedService();
       const senha = encryptedService.encryptPassword(req.body.senha);
 
-      const { email } = req.body;
+      const { email, cpf } = req.body;
+
+      const CPFValidado = await validarCPF(cpf);
+
+      if (!CPFValidado) {
+        res.status(401).send({ message: 'CPF inválido' });
+        return;
+      }
 
       if (email === undefined || email === '') {
         res.status(401).send({ message: 'Email é obrigatório' });
@@ -104,7 +111,7 @@ export default class UsuarioController {
             const savedVet = await vetRepository.save({
               ...req.body,
               idUsuario: usuario.idUsuario,
-              situacao: 'analise',
+              situacao: 'aprovado',
               idVeterinario: usuario.idUsuario,
             });
             await userRepository.update({ idUsuario: usuario.idUsuario }, { tipoUsuario: 'vc' });
@@ -118,7 +125,7 @@ export default class UsuarioController {
 
       if (buscarUsuario.length === 0) {
         const tipoUsuario = 'c';
-        const situacao = 'analise';
+        const situacao = 'aprovado';
         await userRepository.save({ ...req.body, senha, tipoUsuario });
         const buscarUsuariov = await userRepository.find({ where: { email: req.body.email } });
         const { idUsuario } = buscarUsuariov[0];
@@ -173,9 +180,7 @@ export default class UsuarioController {
       const userRepository = db.manager.getRepository(UsuarioSchema);
       const { email, senha, novaSenha } = req.body;
       const buscarUsuario = await userRepository.find({ where: { idUsuario: req.params.id } });
-      console.log(req.params.id);
       const busca = buscarUsuario[0];
-      console.log(busca);
 
       if (busca.length === 0) {
         res.status(404).send({ message: 'Usuário não encontrado' });

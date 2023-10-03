@@ -12,6 +12,7 @@ export default new EntitySchema({
     crmv: {
       type: 'text',
       unique: true,
+      comment: 'CRMV do veterinário é único',
     },
     situacao: {
       type: 'text',
@@ -19,24 +20,30 @@ export default new EntitySchema({
     emailComercial: {
       type: 'text',
     },
-    // enderecoComercial: {
-    //   type: 'text',
-    // },
-    // telefoneComercial: {
-    //   type: 'text',
-    // },
-    // cepComercial: {
-    //   type: 'text',
-    // },
-    // cidadeComercial: {
-    //   type: 'text',
-    // },
-    // estadoComercial: {
-    //   type: 'text',
-    // },
-    // idEspecializacao: {
-    //   type: 'text',
-    // },
+    enderecoComercial: {
+      type: 'text',
+      nullable: true,
+    },
+    telefoneComercial: {
+      type: 'text',
+      nullable: true,
+    },
+    cepComercial: {
+      type: 'text',
+      nullable: true,
+    },
+    cidadeComercial: {
+      type: 'text',
+      nullable: true,
+    },
+    estadoComercial: {
+      type: 'text',
+      nullable: true,
+    },
+    idEspecializacao: {
+      type: 'text',
+      nullable: true,
+    },
     idUsuario: {
       type: 'text',
     },

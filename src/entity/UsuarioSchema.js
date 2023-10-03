@@ -23,6 +23,7 @@ export default new EntitySchema({
     },
     // cpf: {
     //   type: 'text',
+    //   nullable: false,
     // },
     // telefone: {
     //   type: 'text',
