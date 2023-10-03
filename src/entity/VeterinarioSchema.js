@@ -7,7 +7,7 @@ export default new EntitySchema({
   target: VeterinarioModel,
   columns: {
     idVeterinario: {
-      primary: true, type: 'int', generated: true,
+      primary: true, type: 'int',
     },
     crmv: {
       type: 'text',
@@ -37,9 +37,9 @@ export default new EntitySchema({
     // idEspecializacao: {
     //   type: 'text',
     // },
-    // idUsuario: {
-    //   type: 'text',
-    // },
+    idUsuario: {
+      type: 'text',
+    },
   },
 
   relations: {
@@ -59,4 +59,11 @@ export default new EntitySchema({
       },
     },
   },
+//   listeners: {
+//     beforeInsert(event) {
+//       // Defina o idVeterinario igual ao idUsuario antes da inserção
+//       const newEntity = { ...event.entity, idVeterinario: event.entity.idUsuario };
+//       event.entity = Object.assign({}, newEntity);
+//     },
+//   },
 });

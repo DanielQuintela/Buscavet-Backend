@@ -29,7 +29,7 @@ export default class VeterinarioController {
       const veterinarioRepository = db.manager.getRepository(VeterinarioSchema);
       const result = await veterinarioRepository.find({
         select: {
-          id: true, nome: true, email: true, crmv: true,
+          idVeterinario: true, crmv: true,
         },
       });
       res.status(200).send(result);

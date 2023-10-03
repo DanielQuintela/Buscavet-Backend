@@ -119,9 +119,13 @@ export default class UsuarioController {
         }
         if (usuario.tipoUsuario === 'c') {
           if (usuario.idUsuario !== null) {
+            const savedVet = await vetRepository.save({
+              ...req.body,
+              idUsuario: usuario.idUsuario,
+              situacao: 'analise',
+              idVeterinario: usuario.idUsuario,
+            });
             await userRepository.update({ idUsuario: usuario.idUsuario }, { tipoUsuario: 'vc' });
-            // eslint-disable-next-line max-len
-            const savedVet = await vetRepository.save({ ...req.body, idUsuario: usuario.idUsuario });
             res.status(201).send(savedVet);
           } else {
             res.status(404).send({ message: 'usuario não encontrado' });
@@ -129,13 +133,22 @@ export default class UsuarioController {
           return;
         }
       }
+
       if (buscarUsuario.length === 0) {
-        const tipoUsuario = 'vc';
+        const tipoUsuario = 'c';
+        const situacao = 'analise';
         await userRepository.save({ ...req.body, senha, tipoUsuario });
         const buscarUsuariov = await userRepository.find({ where: { email: req.body.email } });
-        const usuariov = buscarUsuariov[0];
-        if (usuariov !== null) {
-          const savedVet = await vetRepository.save({ ...req.body, idUsuario: usuariov.idUsuario });
+        const { idUsuario } = buscarUsuariov[0];
+        if (idUsuario !== null) {
+          const savedVet = await vetRepository.save({
+            ...req.body,
+            idUsuario,
+            situacao,
+            idVeterinario: idUsuario,
+          });
+
+          await userRepository.update({ idUsuario }, { tipoUsuario: 'vc' });
           res.status(201).send(savedVet);
         } else {
           res.status(404).send({ message: 'usuario não cadastrado' });
