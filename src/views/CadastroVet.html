@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cadastro Veterinário</title>
+    <link rel="stylesheet" href="css/CadastroVet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="content first-content">
+            <div class="first-column">
+                <h2 class="title1 title-primary">Seja Bem vind@</h2>
+                <p class="description description-primary">Se você já tiver cadastro </p>
+                <p class="description description-primary">Em nosso site, clique em "Login"</p>
+                <a href="login.html"><button id="signin" class="btn btn-primary">Login</button> </a>
+            </div>
+            <div class="second-column">
+                <img src="img/logo.png" width="250">
+                <h2 class="title2 title-second">Criar uma conta para Veterinário</h2>
+                <form class="form">
+                    <label class="label-input" for="">
+            <i class="far fa-user "></i>
+            <input type="text" placeholder="Name" required>
+          </label>
+                    <label class="label-input" for="">
+            <i class="far fa-envelope"></i>
+            <input type="email" placeholder="Email" required>
+          </label>
+                    <label class="label-input" for="">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Password" required>
+          </label>
+                    <label class="label-input" for="">
+            <i class="far fa-address-card"></i>
+            <input type="text" placeholder="Identificação" required>
+          </label>
+                    <label class="label-input" for="">
+            <i class="fas fa-user-md"></i>
+            <input type="text" id="campo" name="campo" placeholder="CRMV" maxlength="6" required>
+          </label>
+                    <label class="label-input" for="">
+            <i class="fas fa-building"></i>
+            <input type="text" placeholder="Cidade" required>
+          </label>
+                    <label class="label-input" for="">
+            <i class="fas fa-map-marker"></i>
+            <input type="text" placeholder="Estado" required>
+          </label>
+                    <label class="label-input" for="">
+            <i class="fas fa-user-md"></i>
+            <input type="text" placeholder="Especialidade" required>
+          </label>
+                    <label class="label-input" for="">
+            <i class="fas fa-phone"></i>
+            <input type="text" id="telefone" name="telefone" placeholder="Digite o telefone"
+              oninput="formatarTelefone(this)" required>
+
+          </label>
+                    <a href="verificacaoVet.html"> <button class="btn btn-second">Solicitar Verificação</button> </a>
+                    <script>
+                        function formatarTelefone(input) {
+                            // Remove qualquer caracter que não seja número
+                            var telefone = input.value.replace(/\D/g, '');
+
+                            // Formatação "(00)0 0000-0000"
+                            var formatado = '(' + telefone.substring(0, 2) + ') ' + telefone.substring(2, 3) + ' ' + telefone.substring(3, 7) + '-' + telefone.substring(7, 11);
+
+                            // Define o valor formatado de volta para o campo de entrada
+                            input.value = formatado;
+                        }
+                    </script>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

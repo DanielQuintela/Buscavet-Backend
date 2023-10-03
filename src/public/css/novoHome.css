@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Seaweed+Script&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+:root {
+    --cor-fundo: #cde8e7 ;
+    --cor-fundo-pastel: #c7e9da;
+
+    --cor-padrao: #04b4ae;
+    --cor-escuro: #007470;
+    
+    --cor-escuro-footer: #5b9279;
+    
+    --branco:#fff ;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+}
+
+body .container{
+    margin-right: 0;
+    margin-left: 0;
+    padding: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
+.navbar {
+    width: 100%;
+    box-shadow: 0 4px 2px -2px gray;
+}
+
+/*----  Busca   ----*/
+
+.search{
+    width: 100%;
+    height: 300px;
+    background-color: var(--cor-padrao);
+}
+
+.search {
+    display: flex;
+    color: var(--branco);
+    justify-content: center;
+    align-items: center;
+    margin-top: 85px;
+}
+
+.search input, .search select, .search button {
+    border-radius: 50px;
+    text-align: center;
+    color: rgb(194, 193, 193);
+
+}
+
+.search button {
+    color: var(--branco);
+}
+
+.search h1, .search h2 {
+    font-size: 1.3rem;
+    overflow: hidden;
+}
+
+.search-content {
+    width: 50%;
+}
+
+.blog{
+    display: flex;
+    justify-content: center;
+    margin:50px 50px;
+    gap: 20px;
+
+}
+
+/*----  Blog    ----*/
+
+.blog h1 {
+    font-size: 1.2rem;
+}
+
+/*---   Rodapé  ----*/
+
+.rodape {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  footer {
+    background-color: var(--cor-fundo-pastel); /* Cor de fundo pastel verde */
+    padding: 20px 0;    
+  }
+  
+  footer p {
+    color: var(--cor-escuro-footer); 
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  footer ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  footer ul li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  footer ul li a {
+    color: var(--cor-escuro-footer);
+    text-decoration: none;
+    font-size: 14px;
+  }

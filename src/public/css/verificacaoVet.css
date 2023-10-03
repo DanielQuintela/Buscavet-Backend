@@ -1,0 +1,77 @@
+.parent {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    }
+    
+    .div1 { grid-area: 1 / 2 / 4 / 5; }
+
+
+    .parent {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        background-color: #58af9b; /* Cor de fundo pastel verde */
+        padding: 20px;
+       
+      }
+      
+      .div1 {
+        font-family: Arial, sans-serif;
+        color: #ffffff; /* Cor do texto pastel verde */
+      }
+      
+      .div1 p {
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+      
+      .div1 h1 {
+        font-size: 24px;
+      }
+      
+      .icon-espera {
+        font-size: 40px;
+        color: #ffffff; /* Cor do ícone pastel verde */
+      }
+      
+
+      
+.rodape {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  footer {
+    background-color: #c7e9da; /* Cor de fundo pastel verde */
+    padding: 20px 0;    
+  }
+  
+  footer p {
+    color: #5b9279; 
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  footer ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  footer ul li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  footer ul li a {
+    color: #5b9279;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  

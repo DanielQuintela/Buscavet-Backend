@@ -1,0 +1,52 @@
+.quemsomos h1 {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 50px;
+    color: #5b9279;
+    
+  } 
+  
+  p {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    color: rgb(7, 7, 7);
+    
+}
+  
+
+.rodape {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  footer {
+    background-color: #c7e9da; /* Cor de fundo pastel verde */
+    padding: 20px 0;    
+  }
+  
+  footer p {
+    color: #5b9279; 
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  footer ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  footer ul li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  footer ul li a {
+    color: #5b9279;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  
