@@ -23,24 +23,6 @@ export default class UsuarioController {
     }
   };
 
-  // static buscarVeterinarioEmail = async (req, res) => {
-  //   try {
-  //     const userRepository = db.manager.getRepository(UsuarioSchema);
-  //     const buscaUsuario = await userRepository.find({ where: { email: req.body.email } });
-  //     const usuario = buscaUsuario[0];
-  //     if (buscaUsuario.length === 0) {
-  //       res.status(404).send({ message: 'Usuário não encontrado' });
-  //       return;
-  //     }
-  //     const { idUsuario } = usuario;
-  //     const vetRepository = db.manager.getRepository(VeterinarioSchema);
-  //     const result = await vetRepository.find({ where: { idUsuario } });
-  //     return result;
-  //   } catch (erro) {
-  //     res.status(500).send({ message: erro.message });
-  //   }
-  // };
-
   static buscarUsuarios = async (req, res) => {
     try {
       const userRepository = db.manager.getRepository(UsuarioSchema);
@@ -190,9 +172,12 @@ export default class UsuarioController {
       const encryptedService = EncryptedService();
       const userRepository = db.manager.getRepository(UsuarioSchema);
       const { email, senha, novaSenha } = req.body;
-      const buscarUsuario = await userRepository.find({ idUsuario: req.params.id });
+      const buscarUsuario = await userRepository.find({ where: { idUsuario: req.params.id } });
+      console.log(req.params.id);
+      const busca = buscarUsuario[0];
+      console.log(busca);
 
-      if (buscarUsuario.length === 0) {
+      if (busca.length === 0) {
         res.status(404).send({ message: 'Usuário não encontrado' });
         return;
       }
