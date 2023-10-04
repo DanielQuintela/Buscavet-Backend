@@ -99,6 +99,13 @@ export default class UsuarioController {
       // TODO: VALIDAR O CRMV
 
       const buscarUsuario = await userRepository.find({ where: { email: req.body.email } });
+      const senhaU = buscarUsuario[0].senha;
+      const validatePassword = encryptedService.comparePassword(senhaU, req.body.senha);
+
+      if (!validatePassword) {
+        res.status(401).send({ message: 'Senha incorreta' });
+        return;
+      }
       const usuario = buscarUsuario[0];
 
       if (buscarUsuario.length !== 0) {

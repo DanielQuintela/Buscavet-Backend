@@ -24,6 +24,16 @@ export default class VeterinarioController {
     }
   };
 
+  static buscarVeterinariosEspecializacao = async (res, req) => {
+    try {
+      const veterinarioRepository = db.manager.getRepository(VeterinarioSchema);
+      const result = await veterinarioRepository.find({ where: { especializacao: req.body.especializacao } });
+      res.status(200).send(result);
+    } catch (erro) {
+      res.status(500).send({ message: erro.message });
+    }
+  };
+
   static buscarVeterinarios = async (req, res) => {
     try {
       const veterinarioRepository = db.manager.getRepository(VeterinarioSchema);
