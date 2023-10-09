@@ -1,5 +1,5 @@
 import db from '../config/dbConfig.js';
-import { VeterinarioSchema } from '../entity/index.js';
+import { ClienteSchema, VeterinarioSchema } from '../entity/index.js';
 import UsuarioController from './UsuarioController.js';
 // import UsuarioController from './UsuarioController.js';
 
@@ -26,8 +26,8 @@ export default class VeterinarioController {
 
   static buscarVeterinariosEspecializacao = async (res, req) => {
     try {
-      const veterinarioRepository = db.manager.getRepository(VeterinarioSchema);
-      const result = await veterinarioRepository.find({ where: { especializacao: req.body.especializacao } });
+      const veterinarioRepository = db.manager.getRepository(VeterinarioSchema); 
+      const result = await veterinarioRepository.find({ where: { idEspecializacao: req.body.idEspecializacao } });
       res.status(200).send(result);
     } catch (erro) {
       res.status(500).send({ message: erro.message });
@@ -38,9 +38,7 @@ export default class VeterinarioController {
     try {
       const veterinarioRepository = db.manager.getRepository(VeterinarioSchema);
       const result = await veterinarioRepository.find({
-        select: {
-          idVeterinario: true, crmv: true,
-        },
+      
       });
       res.status(200).send(result);
     } catch (error) {
@@ -57,4 +55,26 @@ export default class VeterinarioController {
       res.status(500).send({ message: error.message });
     }
   };
+
+  static veterinarioParaCliente = async ( req, res) => {
+    try {
+      const veterinarioRepository = db.manager.getRepository(VeterinarioSchema);
+      const clientRepository = db.manager.getRepository(ClienteSchema)
+      const busca = await veterinarioRepository.find({
+        where: {
+          idVeterinario: req.params.id,
+        },
+      });
+
+      const { idUsuario } = busca[0];
+      const saved = await clientRepository.save({
+        id: idUsuario,
+        idUsuario: idUsuario,
+      });
+      
+      res.status(200).send(saved);
+    } catch (error) {
+      res.status(500).send({ message: error.message });
+    }
+  }
 }

@@ -7,7 +7,7 @@ export default new EntitySchema({
   target: ClienteModel,
   columns: {
     id: {
-      primary: true, type: 'int', generated: true,
+      primary: true, type: 'int'
     },
     idUsuario: {
       type: 'int',

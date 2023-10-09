@@ -1,6 +1,6 @@
 import { validarCPF, EncryptedService } from '../Services/index.js';
 import db from '../config/dbConfig.js';
-import { UsuarioSchema, VeterinarioSchema } from '../entity/index.js';
+import { ClienteSchema, UsuarioSchema, VeterinarioSchema } from '../entity/index.js';
 
 export default class UsuarioController {
   static buscarUsuarioId = async (req, res) => {
@@ -43,6 +43,8 @@ export default class UsuarioController {
 
   static cadastrarUsuario = async (req, res) => {
     try {
+      const userRepository = db.manager.getRepository(UsuarioSchema);
+      const clientRepository = db.manager.getRepository(ClienteSchema)
       const encryptedService = EncryptedService();
       const senha = encryptedService.encryptPassword(req.body.senha);
 
@@ -64,15 +66,17 @@ export default class UsuarioController {
         return;
       }
 
-      const userRepository = db.manager.getRepository(UsuarioSchema);
       const tipoUsuario = 'c';
       const result = await userRepository.save({ ...req.body, senha, tipoUsuario });
-      res.status(201).send(result);
+      const getId = await userRepository.find({ where: { email: email }});
+      const opa = await clientRepository.save({ id: getId[0].idUsuario, idUsuario: getId[0].idUsuario})
+
+      res.status(201).send(opa);
     } catch (error) {
       res.status(500).send({ message: error.message });
     }
   };
-
+  // Função para cadastrar veterinário, se já existir o usuário ele também vai ser cadastrado
   static cadastrarUsuarioVeterinario = async (req, res) => {
     try {
       const encryptedService = EncryptedService();
@@ -98,17 +102,19 @@ export default class UsuarioController {
 
       // TODO: VALIDAR O CRMV
 
-      const buscarUsuario = await userRepository.find({ where: { email: req.body.email } });
-      const senhaU = buscarUsuario[0].senha;
-      const validatePassword = encryptedService.comparePassword(senhaU, req.body.senha);
 
-      if (!validatePassword) {
-        res.status(401).send({ message: 'Senha incorreta' });
-        return;
-      }
+      const buscarUsuario = await userRepository.find({ where: { email: req.body.email } });
+
       const usuario = buscarUsuario[0];
 
       if (buscarUsuario.length !== 0) {
+        const senhaU = buscarUsuario[0].senha;
+        const validatePassword = encryptedService.comparePassword(req.body.senha, senhaU);
+
+        if (!validatePassword) {
+          res.status(401).send({ message: 'Senha incorreta' });
+          return;
+        }
         if (usuario.tipoUsuario === 'vc') {
           res.status(401).send({ message: 'Veterinario já cadastrado' });
           return;

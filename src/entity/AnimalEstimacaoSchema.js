@@ -15,15 +15,15 @@ export default new EntitySchema({
     especie: {
       type: 'text',
     },
-    raca: {
-      type: 'text',
-    },
-    dataNascimento: {
-      type: 'date',
-    },
-    sexo: {
-      type: 'text',
-    },
+    // raca: {
+    //   type: 'text',
+    // },
+    // dataNascimento: {
+    //   type: 'date',
+    // },
+    // sexo: {
+    //   type: 'text',
+    // },
     idCliente: {
       type: 'int',
     },
