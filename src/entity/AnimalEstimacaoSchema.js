@@ -14,16 +14,20 @@ export default new EntitySchema({
     },
     especie: {
       type: 'text',
+      nullable: true,
     },
-    // raca: {
-    //   type: 'text',
-    // },
-    // dataNascimento: {
-    //   type: 'date',
-    // },
-    // sexo: {
-    //   type: 'text',
-    // },
+    raca: {
+      type: 'text',
+      nullable: true,
+    },
+    dataNascimento: {
+      type: 'date',
+      nullable: true,
+    },
+    sexo: {
+      type: 'text',
+      nullable: true,
+    },
     idCliente: {
       type: 'int',
     },
