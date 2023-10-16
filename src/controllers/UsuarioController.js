@@ -44,7 +44,7 @@ export default class UsuarioController {
   static cadastrarUsuario = async (req, res) => {
     try {
       const userRepository = db.manager.getRepository(UsuarioSchema);
-      const clientRepository = db.manager.getRepository(ClienteSchema)
+      const clientRepository = db.manager.getRepository(ClienteSchema);
       const encryptedService = EncryptedService();
       const senha = encryptedService.encryptPassword(req.body.senha);
 
@@ -68,14 +68,15 @@ export default class UsuarioController {
 
       const tipoUsuario = 'c';
       const result = await userRepository.save({ ...req.body, senha, tipoUsuario });
-      const getId = await userRepository.find({ where: { email: email }});
-      const opa = await clientRepository.save({ id: getId[0].idUsuario, idUsuario: getId[0].idUsuario})
+      const getId = await userRepository.find({ where: { email } });
+      await clientRepository.save({ id: getId[0].idUsuario, idUsuario: getId[0].idUsuario });
 
-      res.status(201).send(opa);
+      res.status(201).send(result);
     } catch (error) {
       res.status(500).send({ message: error.message });
     }
   };
+
   // Função para cadastrar veterinário, se já existir o usuário ele também vai ser cadastrado
   static cadastrarUsuarioVeterinario = async (req, res) => {
     try {
@@ -101,7 +102,6 @@ export default class UsuarioController {
       }
 
       // TODO: VALIDAR O CRMV
-
 
       const buscarUsuario = await userRepository.find({ where: { email: req.body.email } });
 

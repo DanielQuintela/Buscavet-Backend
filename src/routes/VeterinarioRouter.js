@@ -10,7 +10,5 @@ router
   .post('/veterinarios', VeterinarioController.cadastrarVeterinario)
   .post('/veterinarios/especializacao', VeterinarioController.buscarVeterinariosEspecializacao)
   .post('/veterinarios/cliente/:id', VeterinarioController.veterinarioParaCliente);
- 
-
 
 export default router;
