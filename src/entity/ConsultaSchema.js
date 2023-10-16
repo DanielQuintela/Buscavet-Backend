@@ -14,6 +14,7 @@ export default new EntitySchema({
     },
     idEstabelecimento: {
       type: 'int',
+      nullable: true,
     },
     idVeterinario: {
       type: 'int',
@@ -29,6 +30,10 @@ export default new EntitySchema({
     },
     situacao: {
       type: 'text',
+    },
+    observacoes: {
+      type: 'text',
+      nullable: true,
     },
   },
   relations: {
@@ -51,6 +56,13 @@ export default new EntitySchema({
       target: 'VeterinarioModel',
       joinColumn: {
         name: 'idVeterinario',
+      },
+    },
+    animal: {
+      type: 'many-to-one',
+      target: 'AnimalEstimacaoModel',
+      joinColumn: {
+        name: 'idAnimal',
       },
     },
   },

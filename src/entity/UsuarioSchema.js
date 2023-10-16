@@ -23,7 +23,6 @@ export default new EntitySchema({
     },
     // cpf: {
     //   type: 'text',
-    //   nullable: false,
     // },
     // telefone: {
     //   type: 'text',
@@ -45,8 +44,6 @@ export default new EntitySchema({
     // },
     tipoUsuario: {
       type: 'text',
-      nullable: false,
-      // enum: ['c', 'vc'],
     },
   },
   relarions: {
