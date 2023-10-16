@@ -14,6 +14,7 @@ export default class PetController {
         }
     }
 
+    //Aqui é o método usado durante o desenvolvimento para testar a busca de pets
     static async buscarPets (req, res) {
         try {
             const petRepository = db.manager.getRepository(AnimalEstimacaoSchema);
