@@ -1,6 +1,7 @@
 import { validarCPF, EncryptedService } from '../Services/index.js';
 import db from '../config/dbConfig.js';
 import { ClienteSchema, UsuarioSchema, VeterinarioSchema } from '../entity/index.js';
+import JwtService from '../Services/JwtService.js';
 
 export default class UsuarioController {
   static buscarUsuarioId = async (req, res) => {
@@ -164,6 +165,7 @@ export default class UsuarioController {
   static loginUsuario = async (req, res) => {
     try {
       const encryptedService = EncryptedService();
+      const jwtService = JwtService();
 
       const { email, senha } = req.body;
       const userRepository = db.manager.getRepository(UsuarioSchema);
@@ -181,7 +183,8 @@ export default class UsuarioController {
         res.status(401).send({ message: 'Senha incorreta' });
         return;
       }
-      res.status(200).send({ message: 'Login realizado com sucesso' }); // TODO: Fazer um login, falta o token Cookies ou jwt
+      const token = jwtService.generateToken({ userId: user.id });
+      res.status(200).send({ message: 'Login realizado com sucesso', token }); // TODO: Fazer um login, falta o token Cookies ou jwt
     } catch (error) {
       res.status(500).send({ message: error.message });
     }
