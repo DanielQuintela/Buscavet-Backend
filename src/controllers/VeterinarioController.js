@@ -1,41 +1,36 @@
-import EncryptedService from '../Services/EncryptedService.js';
 import db from '../config/dbConfig.js';
-import VeterinarioSchema from '../entity/VeterinarioSchema.js';
+import { ClienteSchema, VeterinarioSchema } from '../entity/index.js';
+import UsuarioController from './UsuarioController.js';
+// import UsuarioController from './UsuarioController.js';
 
 export default class VeterinarioController {
-  static loginVeterinario = async (req, res) => {
+  static buscarVeterinariosId = async (req, res) => {
     try {
-      const encryptedService = EncryptedService();
-      const { email, senha } = req.body;
       const veterinarioRepository = db.manager.getRepository(VeterinarioSchema);
-      const buscarVeterinario = await veterinarioRepository.find({ email });
-
-      if (buscarVeterinario.length === 0) {
-        res.status(404).send({ message: 'Veterinário não encontrado' });
-        return;
-      }
-      const validatePassword = encryptedService.comparePassword(senha, buscarVeterinario[0].senha);
-
-      if (!validatePassword) {
-        res.status(401).send({ message: 'Senha incorreta' });
-        return;
-      }
-
-      res.status(200).send({ message: 'Login realizado com sucesso' });
-    } catch (error) {
-      res.status(500).send({ message: error.message });
+      const result = await veterinarioRepository.find({ where: { idVeterinario: req.params.id } });
+      res.status(200).send(result);
+    } catch (erro) {
+      res.status(500).send({ message: erro.message });
     }
   };
 
-  static cadastrarVeterinario = async (req, res) => {
+  static buscarVeterinariosEmail = async (req, res) => {
     try {
-      const encryptedService = EncryptedService();
       const veterinarioRepository = db.manager.getRepository(VeterinarioSchema);
-      const senha = encryptedService.encryptPassword(req.body.senha);
-      const result = await veterinarioRepository.save({ ...req.body, senha });
-      res.status(201).send(result);
-    } catch (error) {
-      res.status(500).send({ message: error.message });
+      const result = await veterinarioRepository.find({ where: { emailComercial: req.body.emailComercial } });
+      res.status(200).send(result);
+    } catch (erro) {
+      res.status(500).send({ message: erro.message });
+    }
+  };
+
+  static buscarVeterinariosEspecializacao = async (res, req) => {
+    try {
+      const veterinarioRepository = db.manager.getRepository(VeterinarioSchema);
+      const result = await veterinarioRepository.find({ where: { idEspecializacao: req.body.idEspecializacao } });
+      res.status(200).send(result);
+    } catch (erro) {
+      res.status(500).send({ message: erro.message });
     }
   };
 
@@ -43,11 +38,41 @@ export default class VeterinarioController {
     try {
       const veterinarioRepository = db.manager.getRepository(VeterinarioSchema);
       const result = await veterinarioRepository.find({
-        select: {
-          id: true, nome: true, email: true, crmv: true,
-        },
+
       });
       res.status(200).send(result);
+    } catch (error) {
+      res.status(500).send({ message: error.message });
+    }
+  };
+
+  static cadastrarVeterinario = async (req, res) => {
+    try {
+      const saved = await UsuarioController.cadastrarUsuarioVeterinario(req, res);
+
+      res.status(201).send(saved);
+    } catch (error) {
+      res.status(500).send({ message: error.message });
+    }
+  };
+
+  static veterinarioParaCliente = async (req, res) => {
+    try {
+      const veterinarioRepository = db.manager.getRepository(VeterinarioSchema);
+      const clientRepository = db.manager.getRepository(ClienteSchema);
+      const busca = await veterinarioRepository.find({
+        where: {
+          idVeterinario: req.params.id,
+        },
+      });
+
+      const { idUsuario } = busca[0];
+      const saved = await clientRepository.save({
+        id: idUsuario,
+        idUsuario,
+      });
+
+      res.status(200).send(saved);
     } catch (error) {
       res.status(500).send({ message: error.message });
     }
