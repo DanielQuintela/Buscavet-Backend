@@ -8,6 +8,6 @@ router
   .get('/usuarios', UsuarioController.buscarUsuarios)
   .post('/usuarios/login', UsuarioController.loginUsuario)
   .post('/usuarios', UsuarioController.cadastrarUsuario)
-  .patch('/usuarios/:id', authenticateJwt, UsuarioController.mudarSenha);
+  .patch('/usuarios/:userId', authenticateJwt, UsuarioController.mudarSenha);
 
 export default router;

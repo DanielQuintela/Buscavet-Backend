@@ -1,17 +1,21 @@
 import JwtService from '../Services/JwtService.js';
 
-export default function authenticateJwt(req, res) {
-  const { token } = req.headers.authorization;
-
+export default function authenticateJwt(req, res, next) {
+  const token = req.headers.authorization;
+  const jwtService = JwtService();
   if (!token) {
-    return res.status(401).json({ message: 'Token não fornecido' });
+    return res.status(400).json({ message: 'Token não fornecido' });
   }
-
+  // TODO Backlist para logout
   try {
-    const user = JwtService.verifyToken(token);
+    const user = jwtService.verifyToken(token);
     req.user = user;
+    next();
   } catch (error) {
-    return res.status(401).json({ message: 'Token inválido ou expiradooooooo' });
+    if (error.name === 'TokenExpiredError') {
+      return res.status(401).json({ message: 'Token expirado' });
+    }
+    return res.status(401).json({ message: 'Token inválido' });
   }
   return { authenticateJwt };
 }

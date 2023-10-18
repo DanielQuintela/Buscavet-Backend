@@ -4,7 +4,7 @@ const secretKey = process.env.SECRET_KEY;
 
 export default function JwtService() {
   function generateToken(payload) {
-    return jwt.sign(payload, secretKey, { expiresIn: '300' });
+    return jwt.sign(payload, secretKey, { expiresIn: '7d' });
   }
 
   function verifyToken(token) {
