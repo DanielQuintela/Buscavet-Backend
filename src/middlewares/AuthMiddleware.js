@@ -1,5 +1,5 @@
 import JwtService from '../Services/JwtService.js';
-// import blacklist from
+import BlacklistController from '../controllers/BlacklistController.js';
 
 export default function authenticateJwt(req, res, next) {
   const token = req.headers.authorization;
@@ -8,6 +8,7 @@ export default function authenticateJwt(req, res, next) {
     return res.status(400).json({ message: 'Token não fornecido' });
   }
   // TODO Backlist para logout
+  
   try {
     const user = jwtService.verifyToken(token);
     req.user = user;

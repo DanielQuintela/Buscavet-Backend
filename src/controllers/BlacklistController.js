@@ -14,6 +14,17 @@ export default class BlacklistController {
     }
   };
 
+  static verificaTokenBlacklist = async (token) => {
+    try {
+      const blacklistRepository = db.manager.getRepository(BlacklistSchema);
+      const tokenNaBlacklist = await blacklistRepository.findOne({ token });
+
+      return !!tokenNaBlacklist;
+    } catch (error) {
+      throw new Error('Erro ao verificar token na Blacklist');
+    }
+  };
+
   static listarBlacklist = async (req, res) => {
     try {
       const blacklistRepository = db.manager.getRepository(BlacklistSchema);
