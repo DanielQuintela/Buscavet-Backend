@@ -1,4 +1,5 @@
 import JwtService from '../Services/JwtService.js';
+// import blacklist from
 
 export default function authenticateJwt(req, res, next) {
   const token = req.headers.authorization;

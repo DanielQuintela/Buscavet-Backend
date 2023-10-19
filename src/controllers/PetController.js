@@ -50,7 +50,6 @@ export default class PetController {
       const { id } = req.body;
       const pets = await petRepository.find({ where: { idCliente: req.params.id, id } });
 
-      console.log(pets);
       if (!pets || pets.length === 0) {
         res.status(404).send({ message: 'Pet não encontrado' });
         return;

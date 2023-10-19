@@ -27,7 +27,6 @@ export default class UsuarioController {
   static buscarUsuarios = async (req, res) => {
     try {
       const userRepository = db.manager.getRepository(UsuarioSchema);
-      // eslint-disable-next-line max-len
       const result = await userRepository.find({
         select: {
           idUsuario: true,
