@@ -4,12 +4,12 @@ import BlacklistSchema from '../entity/BlacklistSchema.js';
 export default class BlacklistController {
   static adicionarBlacklist = async (req, res) => {
     try {
-      const { token, reason, expirationDate } = req.body;
+      const token = req.headers.authorization;
+      const reason = 'logout';
       const blacklistRepository = db.manager.getRepository(BlacklistSchema);
-      const newToken = await blacklistRepository.save({ token, reason, expirationDate });
+      const newToken = await blacklistRepository.save({ token, reason });
       res.status(201).send(newToken);
     } catch (error) {
-      console.error(error);
       res.status(500).send({ message: error.message });
     }
   };
@@ -21,7 +21,6 @@ export default class BlacklistController {
 
       return !!tokenNaBlacklist;
     } catch (error) {
-      console.error(error);
       throw new Error('Erro ao verificar token na Blacklist');
     }
   }

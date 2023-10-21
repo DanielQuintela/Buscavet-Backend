@@ -18,9 +18,5 @@ export default new EntitySchema({
       type: 'text',
       nullable: false,
     },
-    expirationDate: {
-      type: 'timestamp',
-      nullable: true,
-    },
   },
 });
