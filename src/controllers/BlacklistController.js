@@ -7,23 +7,24 @@ export default class BlacklistController {
       const { token, reason, expirationDate } = req.body;
       const blacklistRepository = db.manager.getRepository(BlacklistSchema);
       const newToken = await blacklistRepository.save({ token, reason, expirationDate });
-
       res.status(201).send(newToken);
     } catch (error) {
+      console.error(error);
       res.status(500).send({ message: error.message });
     }
   };
 
-  static verificaTokenBlacklist = async (token) => {
+  static async verificaTokenBlacklist(token) {
     try {
       const blacklistRepository = db.manager.getRepository(BlacklistSchema);
-      const tokenNaBlacklist = await blacklistRepository.findOne({ token });
+      const tokenNaBlacklist = await blacklistRepository.findOne({ where: { token } });
 
       return !!tokenNaBlacklist;
     } catch (error) {
+      console.error(error);
       throw new Error('Erro ao verificar token na Blacklist');
     }
-  };
+  }
 
   static listarBlacklist = async (req, res) => {
     try {
