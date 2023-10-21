@@ -20,7 +20,6 @@ export default async function authenticateJwt(req, res, next) {
     if (error.name === 'TokenExpiredError') {
       return res.status(401).json({ message: 'Token expirado' });
     }
-    console.log(error);
     return res.status(401).json({ message: 'Token inválido' });
   }
   return { authenticateJwt };
