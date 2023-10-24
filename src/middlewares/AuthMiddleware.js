@@ -14,8 +14,12 @@ export default async function authenticateJwt(req, res, next) {
     if (verificaToken) {
       return res.status(401).json({ message: 'Token na lista negra' });
     }
-    req.user = user;
-    next();
+    if (String(user.userId) === String(req.params.id) && String(user.userEmail) === String(req.body.email)) {
+      req.user = user;
+      next();
+    } else {
+      return res.status(403).json({ message: 'Acesso proibido' });
+    }
   } catch (error) {
     if (error.name === 'TokenExpiredError') {
       return res.status(401).json({ message: 'Token expirado' });
