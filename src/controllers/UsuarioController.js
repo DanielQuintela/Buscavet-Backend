@@ -182,7 +182,7 @@ export default class UsuarioController {
         res.status(401).send({ message: 'Senha incorreta' });
         return;
       }
-      const token = jwtService.generateToken({ userId: user.id });
+      const token = jwtService.generateToken({ userId: user.idUsuario });
       res.status(200).send({ message: 'Login realizado com sucesso', token }); // TODO: Fazer um login, falta o token Cookies ou jwt
     } catch (error) {
       res.status(500).send({ message: error.message });

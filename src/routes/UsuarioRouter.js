@@ -12,6 +12,14 @@ router
   .post('/usuarios/login', UsuarioController.loginUsuario)
   .post('/usuarios/logout', BlacklistController.adicionarBlacklist)
   .post('/usuarios', UsuarioController.cadastrarUsuario)
-  .patch('/usuarios/:userId', authenticateJwt, UsuarioController.mudarSenha);
+  .patch('/usuarios/:id', authenticateJwt, (req, res, next) => {
+    const userIdAutenticado = req.user.userId;
+    const userIdRota = req.params.id;
+    if (String(userIdAutenticado) === String(userIdRota)) {
+      next();
+    } else {
+      res.status(403).json({ message: 'Acesso Proibido.' });
+    }
+  }, UsuarioController.mudarSenha);
 
 export default router;
