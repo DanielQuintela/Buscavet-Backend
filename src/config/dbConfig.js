@@ -1,6 +1,7 @@
 import { DataSource } from 'typeorm';
-import UsuarioSchema from '../entity/UsuarioSchema.js';
-import VeterinarioSchema from '../entity/VeterinarioSchema.js';
+import {
+  UsuarioSchema, VeterinarioSchema, EspecializacaoSchema, EstabelecimentoSchema, ServicoSchema, VacinaSchema, ProdutoSchema, ClienteSchema, AnimalEstimacaoSchema, ConsultaSchema, AvaliacaoSchema, DoseVacinaAnimalSchema, ProdutoEstabelecimentoSchema, ServicoEstabelecimentoSchema, ServicoVeterinarioSchema, UsuarioEstabelecimentoSchema, VeterinarioEstabelecimentoSchema,
+} from '../entity/index.js';
 
 const db = new DataSource({
   type: 'postgres',
@@ -11,7 +12,25 @@ const db = new DataSource({
   database: 'db',
   synchronize: true,
   logging: true,
-  entities: [UsuarioSchema, VeterinarioSchema],
+  entities: [
+    AnimalEstimacaoSchema,
+    AvaliacaoSchema,
+    ClienteSchema,
+    ConsultaSchema,
+    DoseVacinaAnimalSchema,
+    EspecializacaoSchema,
+    EstabelecimentoSchema,
+    ProdutoEstabelecimentoSchema,
+    ProdutoSchema,
+    ServicoEstabelecimentoSchema,
+    ServicoSchema,
+    ServicoVeterinarioSchema,
+    UsuarioEstabelecimentoSchema,
+    UsuarioSchema,
+    VacinaSchema,
+    VeterinarioEstabelecimentoSchema,
+    VeterinarioSchema,
+  ],
   subscribers: [],
   migrations: [],
 });
