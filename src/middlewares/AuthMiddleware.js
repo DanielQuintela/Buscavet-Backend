@@ -18,7 +18,7 @@ export default async function authenticateJwt(req, res, next) {
       req.user = user;
       next();
     } else {
-      return res.status(403).json({ message: 'Acesso proibido' });
+      return res.status(403).json({ message: 'Acesso proibido, dados não coincidem' });
     }
   } catch (error) {
     if (error.name === 'TokenExpiredError') {

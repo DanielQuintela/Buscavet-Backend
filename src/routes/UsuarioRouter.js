@@ -6,7 +6,7 @@ import BlacklistController from '../controllers/BlacklistController.js';
 const router = express.Router();
 
 router
-  .get('/usuarios/:id', UsuarioController.buscarUsuarioId)
+  .get('/usuarios/:id', authenticateJwt, UsuarioController.buscarUsuarioId)
   .get('/usuarios/email', UsuarioController.buscarUsuarioEmail)
   .get('/usuarios', UsuarioController.buscarUsuarios)
   .post('/usuarios/login', UsuarioController.loginUsuario)
@@ -18,7 +18,7 @@ router
     if (String(userIdAutenticado) === String(userIdRota)) {
       next();
     } else {
-      res.status(403).json({ message: 'Acesso Proibido.' });
+      res.status(403).json({ message: 'Acesso Proibido' });
     }
   }, UsuarioController.mudarSenha);
 

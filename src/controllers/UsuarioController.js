@@ -7,7 +7,7 @@ export default class UsuarioController {
   static buscarUsuarioId = async (req, res) => {
     try {
       const userRepository = db.manager.getRepository(UsuarioSchema);
-      const result = await userRepository.find({ where: { idUsuario: req.params.id } });
+      const result = await userRepository.find({ where: { idUsuario: req.params.id }, select: { nome: true, email: true } });
       res.status(200).send(result);
     } catch (erro) {
       res.status(500).send({ message: erro.message });
