@@ -36,6 +36,12 @@ export default new EntitySchema({
     // estado: {
     //   type: 'text',
     // },
+    // numero: {
+    //   type: 'text',
+    // },
+    // complemento: {
+    //   type: 'text',
+    // },
     // cep: {
     //   type: 'text',
     // },
@@ -45,6 +51,7 @@ export default new EntitySchema({
     tipoUsuario: {
       type: 'text',
     },
+    
   },
   relarions: {
     IdVeterinario: {
