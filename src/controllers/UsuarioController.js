@@ -70,7 +70,7 @@ export default class UsuarioController {
       }
 
       if (email === undefined || email === '') {
-        res.status(401).send({ message: 'Email é obrigatório' });
+        res.status(400).send({ message: 'Email é obrigatório' });
         return;
       }
       if (req.body.senha.length < 2) {
@@ -101,11 +101,11 @@ export default class UsuarioController {
       const { email } = req.body;
 
       if (req.body.crmv.length < 6) {
-        res.status(401).send({ message: 'CRMV é obrigatório' });
+        res.status(400).send({ message: 'CRMV é obrigatório' });
         return;
       }
       if (email === undefined || email === '') {
-        res.status(401).send({ message: 'Email é obrigatório' });
+        res.status(400).send({ message: 'Email é obrigatório' });
         return;
       }
       if (req.body.senha.length < 3) {
@@ -128,7 +128,7 @@ export default class UsuarioController {
           return;
         }
         if (usuario.tipoUsuario === 'vc') {
-          res.status(401).send({ message: 'Veterinario já cadastrado' });
+          res.status(403).send({ message: 'Veterinario já cadastrado' });
           return;
         }
         if (usuario.tipoUsuario === 'c') {
@@ -182,6 +182,10 @@ export default class UsuarioController {
       const userRepository = db.manager.getRepository(UsuarioSchema);
       const buscarUsuario = await userRepository.find({ where: { email } });
 
+      if (email === ""){
+        res.status(400).send({ message: 'Email é obrigatório' });
+        return;
+      }
       if (buscarUsuario.length === 0) {
         res.status(404).send({ message: 'Usuário não encontrado' });
         return;

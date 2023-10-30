@@ -1,5 +1,5 @@
 export default class UsuarioModel {
-  constructor(idVeterinario, idUsuario, email, senha, nome, cpf, telefone, endereco, cidade, estado, cep, tipo, dataNascimento) {
+  constructor(idVeterinario, idUsuario, email, senha, nome, cpf, telefone, endereco, cidade, estado, numero, complemento , cep, tipo, dataNascimento) {
     this.idVeterinario = idVeterinario;
     this.idUsuario = idUsuario;
     this.email = email;
@@ -10,6 +10,8 @@ export default class UsuarioModel {
     this.endereco = endereco;
     this.cidade = cidade;
     this.estado = estado;
+    this.numero = numero;
+    this.complemento = complemento;
     this.cep = cep;
     this.tipo = tipo;
     this.dataNascimento = dataNascimento;

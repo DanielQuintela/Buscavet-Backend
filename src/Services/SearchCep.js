@@ -5,10 +5,12 @@ export default class SearchCep {
     try {
       const { cep } = req.body;
 
-      if (!cep || !/^\d{8}$/.test(cep)) {
+      if (!cep ) {
         return res.status(400).send({ message: 'CEP inválido' });
       }
-      const search = await GetCep(cep);
+      const cepFormatado = cep.replace(/[-. ]/g, '');
+
+      const search = await GetCep(cepFormatado);
       const { data } = search;
       // TODO: CRIAR UM TRATAMENTO QUANDO O CEP VIER VAZIO OU NÃO ENCONTRADO
       if (data.erro === 'true') {
