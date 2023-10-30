@@ -7,10 +7,22 @@ export default class UsuarioController {
   static buscarUsuarioId = async (req, res) => {
     try {
       const userRepository = db.manager.getRepository(UsuarioSchema);
-      const result = await userRepository.find({ where: { idUsuario: req.params.id }, select: { nome: true, email: true } });
+      const result = await userRepository.find({
+        where: { idUsuario: req.user.userId },
+        select: {
+          nome: true,
+          email: true,
+          dataNascimento: true,
+          telefone: true,
+          endereco: true,
+          cidade: true,
+          estado: true,
+          cep: true,
+        },
+      });
       res.status(200).send(result);
-    } catch (erro) {
-      res.status(500).send({ message: erro.message });
+    } catch (error) {
+      res.status(500).send({ message: error.message });
     }
   };
 
@@ -19,8 +31,8 @@ export default class UsuarioController {
       const userRepository = db.manager.getRepository(UsuarioSchema);
       const result = await userRepository.find({ where: { email: req.body.email } });
       res.status(200).send(result);
-    } catch (erro) {
-      res.status(500).send({ message: erro.message });
+    } catch (error) {
+      res.status(500).send({ message: error.message });
     }
   };
 
