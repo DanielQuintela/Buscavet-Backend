@@ -60,17 +60,36 @@ export default class VeterinarioController {
     try {
       const veterinarioRepository = db.manager.getRepository(VeterinarioSchema);
       const clientRepository = db.manager.getRepository(ClienteSchema);
+      const usuarioRepository = db.manager.getRepository(UsuarioSchema);
       const busca = await veterinarioRepository.find({
         where: {
           idVeterinario: req.params.id,
         },
       });
 
+      const verificacao = await clientRepository.find({
+        where: {
+          idUsuario: busca[0].idUsuario,
+        },
+      });
+
       const { idUsuario } = busca[0];
+      if (!idUsuario) {
+        res.status(404).send({ message: 'Veterinario não encontrado' });
+        return;
+      }
+
+      if (verificacao.length > 0) {
+        res.status(403).send({ message: 'Veterinario já é um cliente' });
+        return;
+      }
+
       const saved = await clientRepository.save({
         id: idUsuario,
         idUsuario,
       });
+
+      await usuarioRepository.update({ idUsuario }, { tipoUsuario: 'vc' });
 
       res.status(200).send(saved);
     } catch (error) {

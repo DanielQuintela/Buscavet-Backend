@@ -40,6 +40,12 @@ export default new EntitySchema({
     cep: {
       type: 'text',
     },
+    numero: {
+      type: 'text',
+    },
+    complemento: {
+      type: 'text',
+    },
     dataNascimento: {
       type: 'text',
     },

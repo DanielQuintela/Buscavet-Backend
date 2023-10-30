@@ -127,7 +127,7 @@ export default class UsuarioController {
           res.status(401).send({ message: 'Senha incorreta' });
           return;
         }
-        if (usuario.tipoUsuario === 'vc') {
+        if (usuario.tipoUsuario === 'vu' || usuario.tipoUsuario === 'vc') {
           res.status(403).send({ message: 'Veterinario já cadastrado' });
           return;
         }
@@ -149,7 +149,6 @@ export default class UsuarioController {
       }
 
       if (buscarUsuario.length === 0) {
-        const tipoUsuario = 'c';
         const situacao = 'aprovado';
         await userRepository.save({ ...req.body, senha, tipoUsuario });
         const buscarUsuariov = await userRepository.find({ where: { email: req.body.email } });
@@ -162,7 +161,7 @@ export default class UsuarioController {
             idVeterinario: idUsuario,
           });
 
-          await userRepository.update({ idUsuario }, { tipoUsuario: 'vc' });
+          await userRepository.update({ idUsuario }, { tipoUsuario: 'vu' });
           res.status(201).send(savedVet);
         } else {
           res.status(404).send({ message: 'usuario não cadastrado' });
