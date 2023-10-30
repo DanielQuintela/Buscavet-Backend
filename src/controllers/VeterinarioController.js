@@ -1,5 +1,5 @@
 import db from '../config/dbConfig.js';
-import { ClienteSchema, VeterinarioSchema } from '../entity/index.js';
+import { ClienteSchema, UsuarioSchema, VeterinarioSchema } from '../entity/index.js';
 import UsuarioController from './UsuarioController.js';
 // import UsuarioController from './UsuarioController.js';
 
