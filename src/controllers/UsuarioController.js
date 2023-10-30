@@ -7,10 +7,22 @@ export default class UsuarioController {
   static buscarUsuarioId = async (req, res) => {
     try {
       const userRepository = db.manager.getRepository(UsuarioSchema);
-      const result = await userRepository.find({ where: { idUsuario: req.params.id } });
+      const result = await userRepository.find({
+        where: { idUsuario: req.user.userId },
+        select: {
+          nome: true,
+          email: true,
+          dataNascimento: true,
+          telefone: true,
+          endereco: true,
+          cidade: true,
+          estado: true,
+          cep: true,
+        },
+      });
       res.status(200).send(result);
-    } catch (erro) {
-      res.status(500).send({ message: erro.message });
+    } catch (error) {
+      res.status(500).send({ message: error.message });
     }
   };
 
@@ -19,15 +31,14 @@ export default class UsuarioController {
       const userRepository = db.manager.getRepository(UsuarioSchema);
       const result = await userRepository.find({ where: { email: req.body.email } });
       res.status(200).send(result);
-    } catch (erro) {
-      res.status(500).send({ message: erro.message });
+    } catch (error) {
+      res.status(500).send({ message: error.message });
     }
   };
 
   static buscarUsuarios = async (req, res) => {
     try {
       const userRepository = db.manager.getRepository(UsuarioSchema);
-      // eslint-disable-next-line max-len
       const result = await userRepository.find({
         select: {
           idUsuario: true,
@@ -187,7 +198,7 @@ export default class UsuarioController {
         res.status(401).send({ message: 'Senha incorreta' });
         return;
       }
-      const token = jwtService.generateToken({ userId: user.id });
+      const token = jwtService.generateToken({ userId: user.idUsuario, userEmail: user.email });
       res.status(200).send({ message: 'Login realizado com sucesso', token }); // TODO: Fazer um login, falta o token Cookies ou jwt
     } catch (error) {
       res.status(500).send({ message: error.message });
@@ -198,15 +209,13 @@ export default class UsuarioController {
     try {
       const encryptedService = EncryptedService();
       const userRepository = db.manager.getRepository(UsuarioSchema);
-      const { email, senha, novaSenha } = req.body;
-      const buscarUsuario = await userRepository.find({ where: { idUsuario: req.params.id } });
-      const busca = buscarUsuario[0];
+      const { senha, novaSenha } = req.body;
+      const usuarioId = req.user.userId;
+      const user = await userRepository.findOne({ where: { idUsuario: usuarioId } });
 
-      if (busca.length === 0) {
-        res.status(404).send({ message: 'Usuário não encontrado' });
-        return;
+      if (!user) {
+        req.status(404).send({ message: 'Usuario não encontrado' });
       }
-      const user = buscarUsuario[0];
 
       const validatePassword = encryptedService.comparePassword(senha, user.senha);
 
@@ -217,7 +226,7 @@ export default class UsuarioController {
 
       const senhaCod = encryptedService.encryptPassword(novaSenha);
 
-      await userRepository.update({ email }, { senha: senhaCod });
+      await userRepository.update(usuarioId, { senha: senhaCod });
       res.status(200).send({ message: 'Senha alterada com sucesso' });
     } catch (error) {
       res.status(500).send({ message: error.message });

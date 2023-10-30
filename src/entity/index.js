@@ -15,8 +15,25 @@ import ServicoEstabelecimentoSchema from './ServicoEstabelecimentoSchema.js';
 import ServicoVeterinarioSchema from './ServicoVeterinarioSchema.js';
 import UsuarioEstabelecimentoSchema from './UsuarioEstabelecimentoSchema.js';
 import VeterinarioEstabelecimentoSchema from './VeterinarioEstabelecimentoSchema.js';
+import BlacklistSchema from './BlacklistSchema.js';
 
 export {
-  // eslint-disable-next-line max-len
-  UsuarioSchema, VeterinarioSchema, EspecializacaoSchema, EstabelecimentoSchema, ServicoSchema, VacinaSchema, ProdutoSchema, ClienteSchema, AnimalEstimacaoSchema, ConsultaSchema, AvaliacaoSchema, DoseVacinaAnimalSchema, ProdutoEstabelecimentoSchema, ServicoEstabelecimentoSchema, ServicoVeterinarioSchema, UsuarioEstabelecimentoSchema, VeterinarioEstabelecimentoSchema,
+  UsuarioSchema,
+  VeterinarioSchema,
+  EspecializacaoSchema,
+  EstabelecimentoSchema,
+  ServicoSchema,
+  VacinaSchema,
+  ProdutoSchema,
+  ClienteSchema,
+  AnimalEstimacaoSchema,
+  ConsultaSchema,
+  AvaliacaoSchema,
+  DoseVacinaAnimalSchema,
+  ProdutoEstabelecimentoSchema,
+  ServicoEstabelecimentoSchema,
+  ServicoVeterinarioSchema,
+  UsuarioEstabelecimentoSchema,
+  VeterinarioEstabelecimentoSchema,
+  BlacklistSchema,
 };
