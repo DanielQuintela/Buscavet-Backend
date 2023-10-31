@@ -41,9 +41,14 @@ export default class VeterinarioController {
   static buscarVeterinarios = async (req, res) => {
     try {
       const veterinarioRepository = db.manager.getRepository(VeterinarioSchema);
-      const result = await veterinarioRepository.find({
+      const result = await veterinarioRepository.createQueryBuilder('veterinario').leftJoinAndSelect('veterinario.usuario', 'usuario').select([
+        'veterinario.idVeterinario',
+        'veterinario.emailComercial',
+        'veterinario.idUsuario',
+        'usuario.nome',
+        'usuario.email',
+      ]).getMany();
 
-      });
       res.status(200).send(result);
     } catch (error) {
       res.status(500).send({ message: error.message });

@@ -27,27 +27,35 @@ export default new EntitySchema({
     },
     telefone: {
       type: 'text',
+      nullable: true,
     },
     endereco: {
       type: 'text',
+      nullable: true,
     },
     cidade: {
       type: 'text',
+      nullable: true,
     },
     estado: {
       type: 'text',
+      nullable: true,
     },
     cep: {
       type: 'text',
+      nullable: true,
     },
     numero: {
       type: 'text',
+      nullable: true,
     },
     complemento: {
       type: 'text',
+      nullable: true,
     },
     dataNascimento: {
       type: 'text',
+      nullable: true,
     },
     tipoUsuario: {
       type: 'text',
