@@ -17,7 +17,9 @@ export default class VeterinarioController {
   static buscarVeterinariosEmail = async (req, res) => {
     try {
       const veterinarioRepository = db.manager.getRepository(VeterinarioSchema);
-      const result = await veterinarioRepository.find({ where: { emailComercial: req.body.emailComercial } });
+      const result = await veterinarioRepository.find(
+        { where: { emailComercial: req.body.emailComercial } },
+      );
       res.status(200).send(result);
     } catch (erro) {
       res.status(500).send({ message: erro.message });
@@ -27,7 +29,9 @@ export default class VeterinarioController {
   static buscarVeterinariosEspecializacao = async (res, req) => {
     try {
       const veterinarioRepository = db.manager.getRepository(VeterinarioSchema);
-      const result = await veterinarioRepository.find({ where: { idEspecializacao: req.body.idEspecializacao } });
+      const result = await veterinarioRepository.find(
+        { where: { idEspecializacao: req.body.idEspecializacao } },
+      );
       res.status(200).send(result);
     } catch (erro) {
       res.status(500).send({ message: erro.message });

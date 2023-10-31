@@ -25,6 +25,5 @@ module.exports = {
     'import/extensions': ['error', 'ignorePackages', {
       js: 'always',
     }],
-    'max-len': ['error', { code: 370 }],
   },
 };

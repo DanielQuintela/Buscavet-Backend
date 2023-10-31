@@ -1,5 +1,21 @@
 export default class UsuarioModel {
-  constructor(idVeterinario, idUsuario, email, senha, nome, cpf, telefone, endereco, cidade, estado, numero, complemento, cep, tipo, dataNascimento) {
+  constructor(
+    idVeterinario,
+    idUsuario,
+    email,
+    senha,
+    nome,
+    cpf,
+    telefone,
+    endereco,
+    cidade,
+    estado,
+    numero,
+    complemento,
+    cep,
+    tipo,
+    dataNascimento,
+  ) {
     this.idVeterinario = idVeterinario;
     this.idUsuario = idUsuario;
     this.email = email;

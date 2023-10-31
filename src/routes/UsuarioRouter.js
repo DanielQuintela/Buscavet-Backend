@@ -15,7 +15,8 @@ router
   .patch('/usuarios/:id', authenticateJwt, (req, res, next) => {
     const userIdAutenticado = req.user.userId;
     const userIdRota = req.params.id;
-    if (String(userIdAutenticado) === String(userIdRota) && String(req.user.userEmail) === String(req.body.email)) {
+    if (String(userIdAutenticado) === String(userIdRota)
+    && String(req.user.userEmail) === String(req.body.email)) {
       next();
     } else {
       res.status(403).json({ message: 'Acesso Proibido' });
