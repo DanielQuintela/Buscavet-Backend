@@ -18,6 +18,8 @@ export default class UsuarioController {
           cidade: true,
           estado: true,
           cep: true,
+          numero: true,
+          complemento: true,
         },
       });
       res.status(200).send(result);
@@ -149,6 +151,7 @@ export default class UsuarioController {
       }
 
       if (buscarUsuario.length === 0) {
+        const tipoUsuario = 'c';
         const situacao = 'aprovado';
         await userRepository.save({ ...req.body, senha, tipoUsuario });
         const buscarUsuariov = await userRepository.find({ where: { email: req.body.email } });
@@ -181,7 +184,7 @@ export default class UsuarioController {
       const userRepository = db.manager.getRepository(UsuarioSchema);
       const buscarUsuario = await userRepository.find({ where: { email } });
 
-      if (email === ""){
+      if (email === '') {
         res.status(400).send({ message: 'Email é obrigatório' });
         return;
       }

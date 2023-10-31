@@ -52,7 +52,6 @@ export default new EntitySchema({
     tipoUsuario: {
       type: 'text',
     },
-    
   },
   relarions: {
     IdVeterinario: {
