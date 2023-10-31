@@ -149,6 +149,7 @@ export default class UsuarioController {
       }
 
       if (buscarUsuario.length === 0) {
+        const tipoUsuario = 'c';
         const situacao = 'aprovado';
         await userRepository.save({ ...req.body, senha, tipoUsuario });
         const buscarUsuariov = await userRepository.find({ where: { email: req.body.email } });
