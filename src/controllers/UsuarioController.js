@@ -1,6 +1,11 @@
 import { validarCPF, EncryptedService } from '../Services/index.js';
 import db from '../config/dbConfig.js';
-import { ClienteSchema, UsuarioSchema, VeterinarioSchema } from '../entity/index.js';
+import {
+  ClienteSchema,
+  EspecializacaoSchema,
+  UsuarioSchema,
+  VeterinarioSchema,
+} from '../entity/index.js';
 import JwtService from '../Services/JwtService.js';
 
 export default class UsuarioController {
@@ -99,6 +104,7 @@ export default class UsuarioController {
 
       const userRepository = db.manager.getRepository(UsuarioSchema);
       const vetRepository = db.manager.getRepository(VeterinarioSchema);
+      const espRepository = db.manager.getRepository(EspecializacaoSchema);
 
       const { email } = req.body;
 
@@ -118,8 +124,11 @@ export default class UsuarioController {
       // TODO: VALIDAR O CRMV
 
       const buscarUsuario = await userRepository.find({ where: { email: req.body.email } });
-
+      const buscarEsp = await espRepository.find(
+        { where: { idEspecializacao: req.body.idEspecializacao } },
+      );
       const usuario = buscarUsuario[0];
+      const especialidade = buscarEsp[0];
 
       if (buscarUsuario.length !== 0) {
         const senhaU = buscarUsuario[0].senha;
@@ -128,6 +137,9 @@ export default class UsuarioController {
         if (!validatePassword) {
           res.status(401).send({ message: 'Senha incorreta' });
           return;
+        }
+        if (buscarEsp === null) {
+          res.status(500).send({ message: 'Especialidade vazia' });
         }
         if (usuario.tipoUsuario === 'vu' || usuario.tipoUsuario === 'vc') {
           res.status(403).send({ message: 'Veterinario já cadastrado' });
@@ -140,11 +152,13 @@ export default class UsuarioController {
               idUsuario: usuario.idUsuario,
               situacao: 'aprovado',
               idVeterinario: usuario.idUsuario,
+              idEspecializacao: especialidade.idEspecializacao,
             });
             await userRepository.update({ idUsuario: usuario.idUsuario }, { tipoUsuario: 'vc' });
             res.status(201).send(savedVet);
           } else {
             res.status(404).send({ message: 'usuario não encontrado' });
+            res.status(500).send({ message: 'Campos incompletos' });
           }
           return;
         }

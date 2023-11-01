@@ -18,7 +18,7 @@ export default class EspecializacaoController {
       const especializacaoRepository = db.manager.getRepository(EspecializacaoSchema);
       const result = await especializacaoRepository.find({
         select: {
-          id: true,
+          idEspecializacao: true,
           nome: true,
         },
       });

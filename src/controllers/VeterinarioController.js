@@ -45,6 +45,7 @@ export default class VeterinarioController {
         'veterinario.idVeterinario',
         'veterinario.emailComercial',
         'veterinario.idUsuario',
+        'veterinario.idEspecializacao',
         'usuario.nome',
         'usuario.email',
       ]).getMany();
