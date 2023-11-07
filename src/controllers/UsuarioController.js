@@ -1,3 +1,5 @@
+/* eslint-disable import/no-named-as-default-member */
+/* eslint-disable import/no-named-as-default */
 import { validarCPF, EncryptedService } from '../Services/index.js';
 import db from '../config/dbConfig.js';
 import {
@@ -7,6 +9,9 @@ import {
   VeterinarioSchema,
 } from '../entity/index.js';
 import JwtService from '../Services/JwtService.js';
+import validarCRMV from '../Services/ValidarCfmv.js';
+
+// TODO REMOVER ESSAS REGRAS DO ESLINT
 
 export default class UsuarioController {
   static buscarUsuarioId = async (req, res) => {
@@ -107,8 +112,10 @@ export default class UsuarioController {
       const espRepository = db.manager.getRepository(EspecializacaoSchema);
 
       const { email } = req.body;
+      const { crmv } = req.body;
+      const crmvValidado = await validarCRMV(crmv);
 
-      if (req.body.crmv.length < 6) {
+      if (req.body.crmv.length < 5) {
         res.status(400).send({ message: 'CRMV é obrigatório' });
         return;
       }
@@ -121,7 +128,10 @@ export default class UsuarioController {
         return;
       }
 
-      // TODO: VALIDAR O CRMV
+      if (!crmvValidado) {
+        res.status(404).send({ message: 'CRMV não encontrado' });
+        return;
+      }
 
       const buscarUsuario = await userRepository.find({ where: { email: req.body.email } });
       const buscarEsp = await espRepository.find(
