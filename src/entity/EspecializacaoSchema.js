@@ -10,6 +10,7 @@ export default new EntitySchema({
       primary: true,
       type: 'int',
       generated: true,
+      array: true,
     },
     nome: {
       type: 'text',
