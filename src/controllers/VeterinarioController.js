@@ -53,7 +53,7 @@ export default class VeterinarioController {
           'veterinario.cidadeComercial',
           'usuario.nome',
           'usuario.email',
-          'especializacao.nome',  // Alias para o nome da especialização
+          'especializacao.nome', 
         ])
         .getMany();
   
