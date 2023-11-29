@@ -1,6 +1,6 @@
 export default class EspecializacaoModel {
-  constructor(id, nome) {
-    this.id = id;
+  constructor(idEspecializacao, nome) {
+    this.idEspecializacao = idEspecializacao;
     this.nome = nome;
   }
 }

@@ -42,6 +42,7 @@ export default new EntitySchema({
     },
     idEspecializacao: {
       type: 'text',
+      array: true,
     },
     idUsuario: {
       type: 'text',
@@ -58,18 +59,11 @@ export default new EntitySchema({
       nullable: false,
     },
     especializacao: {
-      type: 'many-to-one',
+      type: 'many-to-many',
       target: 'EspecializacaoModel',
       joinColumn: {
         name: 'idEspecializacao',
       },
     },
   },
-//   listeners: {
-//     beforeInsert(event) {
-//       // Defina o idVeterinario igual ao idUsuario antes da inserção
-//       const newEntity = { ...event.entity, idVeterinario: event.entity.idUsuario };
-//       event.entity = Object.assign({}, newEntity);
-//     },
-//   },
 });

@@ -21,8 +21,8 @@ export default async function validarCRMV(crmv) {
       throw new Error('Erro na requisição');
     }
     const data = await response.json();
-    const validade = ajv.compile(schema);
-    const valid = validade(data);
+    const validate = ajv.compile(schema);
+    const valid = validate(data);
 
     if (!valid) {
       console.log('Crmv inválido', validade.errors);

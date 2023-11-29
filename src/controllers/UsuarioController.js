@@ -1,5 +1,4 @@
-/* eslint-disable import/no-named-as-default-member */
-/* eslint-disable import/no-named-as-default */
+import { In } from 'typeorm';
 import { validarCPF, EncryptedService } from '../Services/index.js';
 import db from '../config/dbConfig.js';
 import {
@@ -9,9 +8,7 @@ import {
   VeterinarioSchema,
 } from '../entity/index.js';
 import JwtService from '../Services/JwtService.js';
-import validarCRMV from '../Services/ValidarCfmv.js';
-
-// TODO REMOVER ESSAS REGRAS DO ESLINT
+// import validarCRMV from '../Services/ValidarCfmv.js';
 
 export default class UsuarioController {
   static buscarUsuarioId = async (req, res) => {
@@ -110,10 +107,9 @@ export default class UsuarioController {
       const userRepository = db.manager.getRepository(UsuarioSchema);
       const vetRepository = db.manager.getRepository(VeterinarioSchema);
       const espRepository = db.manager.getRepository(EspecializacaoSchema);
-
+      // const { crmv } = req.body;
       const { email } = req.body;
-      const { crmv } = req.body;
-      const crmvValidado = await validarCRMV(crmv);
+      // const crmvValidado = await validarCRMV(crmv);
 
       if (req.body.crmv.length < 5) {
         res.status(400).send({ message: 'CRMV é obrigatório' });
@@ -128,17 +124,31 @@ export default class UsuarioController {
         return;
       }
 
-      if (!crmvValidado) {
-        res.status(404).send({ message: 'CRMV não encontrado' });
-        return;
-      }
+      // if (!crmvValidado) {
+      //   res.status(404).send({ message: 'CRMV não encontrado' });
+      //   return;
+      // }
 
       const buscarUsuario = await userRepository.find({ where: { email: req.body.email } });
-      const buscarEsp = await espRepository.find(
-        { where: { idEspecializacao: req.body.idEspecializacao } },
+      const especialidadesIds = req.body.especializacoes.map(
+        (especializacao) => especializacao.idEspecializacao,
       );
+      const especialidadesExistentes = await espRepository.find({
+        where: { idEspecializacao: In(especialidadesIds) },
+      });
+
+      const especialidadesExistentesIds = especialidadesExistentes.map(
+        (especialidade) => especialidade.idEspecializacao,
+      );
+      const especialidadesNaoEncontradas = especialidadesIds.filter(
+        (id) => !especialidadesExistentesIds.includes(id),
+      );
+
+      if (especialidadesNaoEncontradas.length > 0) {
+        res.status(404).send({ message: `Especialidades não encontradas: ${especialidadesNaoEncontradas.join(', ')}` });
+        return;
+      }
       const usuario = buscarUsuario[0];
-      const especialidade = buscarEsp[0];
 
       if (buscarUsuario.length !== 0) {
         const senhaU = buscarUsuario[0].senha;
@@ -148,8 +158,9 @@ export default class UsuarioController {
           res.status(401).send({ message: 'Senha incorreta' });
           return;
         }
-        if (buscarEsp === null) {
+        if (especialidadesIds.length === 0) {
           res.status(500).send({ message: 'Especialidade vazia' });
+          return;
         }
         if (usuario.tipoUsuario === 'vu' || usuario.tipoUsuario === 'vc') {
           res.status(403).send({ message: 'Veterinario já cadastrado' });
@@ -162,7 +173,7 @@ export default class UsuarioController {
               idUsuario: usuario.idUsuario,
               situacao: 'aprovado',
               idVeterinario: usuario.idUsuario,
-              idEspecializacao: especialidade.idEspecializacao,
+              idEspecializacao: especialidadesIds,
             });
             await userRepository.update({ idUsuario: usuario.idUsuario }, { tipoUsuario: 'vc' });
             res.status(201).send(savedVet);
@@ -186,8 +197,8 @@ export default class UsuarioController {
             idUsuario,
             situacao,
             idVeterinario: idUsuario,
+            idEspecializacao: especialidadesIds,
           });
-
           await userRepository.update({ idUsuario }, { tipoUsuario: 'vu' });
           res.status(201).send(savedVet);
         } else {
