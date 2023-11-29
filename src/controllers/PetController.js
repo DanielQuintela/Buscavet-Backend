@@ -6,7 +6,6 @@ export default class PetController {
     try {
       const petRepository = db.manager.getRepository(AnimalEstimacaoSchema);
       const busca = await petRepository.find({ where: { idCliente: req.headers.authorization.userId } });
-      console.log('--------------------------------------------->',req.headers.authorization.userId);
       res.status(200).send(busca);
     } catch (erro) {
       res.status(500).send({ message: erro.message });
