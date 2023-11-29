@@ -25,14 +25,14 @@ export default async function validarCRMV(crmv) {
     const valid = validade(data);
 
     if (!valid) {
-      console.log('Dados inválidos', validade.errors);
-      throw new Error('Dados inválidos');
+      console.log('Crmv inválido', validade.errors);
+      throw new Error('Crmv inválido');
     }
-    console.log('Dados corretos!');
+    console.log('Crmv válido!');
 
     return data;
   } catch (error) {
-    console.error('Erro durante a validação', error);
+    console.error('Erro durante a validação do crmv', error);
     throw error;
   }
 }
