@@ -42,7 +42,6 @@ export default new EntitySchema({
     },
     idEspecializacao: {
       type: 'text',
-      nullable: true,
     },
     idUsuario: {
       type: 'text',

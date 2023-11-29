@@ -6,7 +6,7 @@ export default new EntitySchema({
   tableName: 'ESPECIALIZACOES',
   target: EspecializacaoModel,
   columns: {
-    id: {
+    idEspecializacao: {
       primary: true,
       type: 'int',
       generated: true,

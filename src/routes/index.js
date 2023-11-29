@@ -4,6 +4,7 @@ import VeterinarioRouter from './VeterinarioRouter.js';
 import ServicesRouter from './ServicesRouter.js';
 import ClientRouter from './ClienteRouter.js';
 import PetRouter from './PetRouter.js';
+import EspecializacaoRouter from './EspecializacaoRouter.js';
 
 const routes = (app) => {
   app.route('/').get((req, res) => {
@@ -16,6 +17,7 @@ const routes = (app) => {
   app.use(ServicesRouter);
   app.use(ClientRouter);
   app.use(PetRouter);
+  app.use(EspecializacaoRouter);
 };
 
 export default routes;

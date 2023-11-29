@@ -1,6 +1,23 @@
 import { DataSource } from 'typeorm';
 import {
-  UsuarioSchema, VeterinarioSchema, EspecializacaoSchema, EstabelecimentoSchema, ServicoSchema, VacinaSchema, ProdutoSchema, ClienteSchema, AnimalEstimacaoSchema, ConsultaSchema, AvaliacaoSchema, DoseVacinaAnimalSchema, ProdutoEstabelecimentoSchema, ServicoEstabelecimentoSchema, ServicoVeterinarioSchema, UsuarioEstabelecimentoSchema, VeterinarioEstabelecimentoSchema,
+  UsuarioSchema,
+  VeterinarioSchema,
+  EspecializacaoSchema,
+  EstabelecimentoSchema,
+  ServicoSchema,
+  VacinaSchema,
+  ProdutoSchema,
+  ClienteSchema,
+  AnimalEstimacaoSchema,
+  ConsultaSchema,
+  AvaliacaoSchema,
+  DoseVacinaAnimalSchema,
+  ProdutoEstabelecimentoSchema,
+  ServicoEstabelecimentoSchema,
+  ServicoVeterinarioSchema,
+  UsuarioEstabelecimentoSchema,
+  VeterinarioEstabelecimentoSchema,
+  BlacklistSchema,
 } from '../entity/index.js';
 
 const db = new DataSource({
@@ -15,6 +32,7 @@ const db = new DataSource({
   entities: [
     AnimalEstimacaoSchema,
     AvaliacaoSchema,
+    BlacklistSchema,
     ClienteSchema,
     ConsultaSchema,
     DoseVacinaAnimalSchema,

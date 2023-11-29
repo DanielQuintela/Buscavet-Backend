@@ -5,7 +5,7 @@ export default class SearchCep {
     try {
       const { cep } = req.body;
 
-      if (!cep ) {
+      if (!cep) {
         return res.status(400).send({ message: 'CEP inválido' });
       }
       const cepFormatado = cep.replace(/[-. ]/g, '');
@@ -16,8 +16,6 @@ export default class SearchCep {
       if (data.erro === 'true') {
         return res.status(204).send({ message: 'CEP não Encontrado' });
       }
-      // eslint-disable-next-line no-console
-      console.log(search);
 
       return res.status(200).send(data);
     } catch (error) {

@@ -5,7 +5,7 @@ export default class PetController {
   static async buscarMeuPet(req, res) {
     try {
       const petRepository = db.manager.getRepository(AnimalEstimacaoSchema);
-      const busca = await petRepository.find({ where: { idCliente: req.params.id } });
+      const busca = await petRepository.find({ where: { idCliente: req.headers.authorization.userId } });
       res.status(200).send(busca);
     } catch (erro) {
       res.status(500).send({ message: erro.message });
@@ -28,7 +28,7 @@ export default class PetController {
       const petRepository = db.manager.getRepository(AnimalEstimacaoSchema);
       const clientRepository = db.manager.getRepository(ClienteSchema);
 
-      const user = await clientRepository.find({ where: { idUsuario: req.params.id } });
+      const user = await clientRepository.find({ where: { idCliente: req.headers.authorization.userId } });
       const cliente = user[0];
 
       if (!cliente) {
@@ -48,9 +48,8 @@ export default class PetController {
       const petRepository = db.manager.getRepository(AnimalEstimacaoSchema);
 
       const { id } = req.body;
-      const pets = await petRepository.find({ where: { idCliente: req.params.id, id } });
+      const pets = await petRepository.find({ where: { idCliente: req.headers.authorization.userId, id } });
 
-      console.log(pets);
       if (!pets || pets.length === 0) {
         res.status(404).send({ message: 'Pet não encontrado' });
         return;

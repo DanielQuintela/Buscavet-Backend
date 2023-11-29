@@ -21,27 +21,42 @@ export default new EntitySchema({
     nome: {
       type: 'text',
     },
-    // cpf: {
-    //   type: 'text',
-    // },
-    // telefone: {
-    //   type: 'text',
-    // },
-    // endereco: {
-    //   type: 'text',
-    // },
-    // cidade: {
-    //   type: 'text',
-    // },
-    // estado: {
-    //   type: 'text',
-    // },
-    // cep: {
-    //   type: 'text',
-    // },
-    // dataNascimento: {
-    //   type: 'text',
-    // },
+    cpf: {
+      type: 'text',
+      nullable: true,
+    },
+    telefone: {
+      type: 'text',
+      nullable: true,
+    },
+    endereco: {
+      type: 'text',
+      nullable: true,
+    },
+    cidade: {
+      type: 'text',
+      nullable: true,
+    },
+    estado: {
+      type: 'text',
+      nullable: true,
+    },
+    cep: {
+      type: 'text',
+      nullable: true,
+    },
+    numero: {
+      type: 'text',
+      nullable: true,
+    },
+    complemento: {
+      type: 'text',
+      nullable: true,
+    },
+    dataNascimento: {
+      type: 'text',
+      nullable: true,
+    },
     tipoUsuario: {
       type: 'text',
     },
