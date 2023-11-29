@@ -17,17 +17,21 @@ export default class VeterinarioController {
   static buscarVeterinariosEmail = async (req, res) => {
     try {
       const veterinarioRepository = db.manager.getRepository(VeterinarioSchema);
-      const result = await veterinarioRepository.find({ where: { emailComercial: req.body.emailComercial } });
+      const result = await veterinarioRepository.find(
+        { where: { emailComercial: req.body.emailComercial } },
+      );
       res.status(200).send(result);
     } catch (erro) {
       res.status(500).send({ message: erro.message });
     }
   };
 
-  static buscarVeterinariosEspecializacao = async (res, req) => {
+  static buscarVeterinariosEspecializacao = async (req, res) => {
     try {
       const veterinarioRepository = db.manager.getRepository(VeterinarioSchema);
-      const result = await veterinarioRepository.find({ where: { idEspecializacao: req.body.idEspecializacao } });
+      const result = await veterinarioRepository.find(
+        { where: { idEspecializacao: req.body.idEspecializacao } },
+      );
       res.status(200).send(result);
     } catch (erro) {
       res.status(500).send({ message: erro.message });
@@ -37,14 +41,27 @@ export default class VeterinarioController {
   static buscarVeterinarios = async (req, res) => {
     try {
       const veterinarioRepository = db.manager.getRepository(VeterinarioSchema);
-      const result = await veterinarioRepository.find({
-
-      });
+      const result = await veterinarioRepository.createQueryBuilder('veterinario')
+        .leftJoinAndSelect('veterinario.usuario', 'usuario')
+        .leftJoinAndSelect('veterinario.especializacao', 'especializacao')  // Assumindo que a relação entre Veterinario e Especializacao é feita corretamente no seu modelo
+        .select([
+          'veterinario.idVeterinario',
+          'veterinario.emailComercial',
+          'veterinario.idUsuario',
+          'veterinario.idEspecializacao',
+          'veterinario.estadoComercial',
+          'veterinario.cidadeComercial',
+          'usuario.nome',
+          'usuario.email',
+          'especializacao.nome', 
+        ])
+        .getMany();
+  
       res.status(200).send(result);
     } catch (error) {
       res.status(500).send({ message: error.message });
     }
-  };
+  };  
 
   static cadastrarVeterinario = async (req, res) => {
     try {

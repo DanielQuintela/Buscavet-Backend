@@ -5,7 +5,7 @@ export default class SearchCep {
     try {
       const { cep } = req.body;
 
-      if (!cep ) {
+      if (!cep) {
         return res.status(400).send({ message: 'CEP inválido' });
       }
       const cepFormatado = cep.replace(/[-. ]/g, '');
