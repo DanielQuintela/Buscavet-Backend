@@ -11,7 +11,6 @@ import {
 import JwtService from '../Services/JwtService.js';
 import validarCRMV from '../Services/ValidarCfmv.js';
 
-// TODO REMOVER ESSAS REGRAS DO ESLINT
 
 export default class UsuarioController {
   static buscarUsuarioId = async (req, res) => {
